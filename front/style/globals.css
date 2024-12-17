@@ -21,7 +21,7 @@ a:active {
 /* Сброс базовых стилей для html и body */
 html,
 body {
-  height: 150%; 
+  height: 100%; 
   margin: 0;
   padding: 0;
   font-family: sans-serif; /* Базовый шрифт для всего документа */
