@@ -31,6 +31,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 /* Сброс стилей для форм */
 input,
 button,
@@ -69,6 +71,8 @@ img {
   height: auto;
   border: none;
 }
+
+
 
 /* Сброс стилей для заголовков */
 h1, h2, h3, h4, h5, h6 {
@@ -129,6 +133,24 @@ option {
 	height: 150%; 
 	display: flex; 
 	flex-direction: column; 
+}
+
+
+
+@font-face {
+  font-family: 'intro';
+  src: url('../fonts/intro.woff2') format('woff2'),
+       url('../fonts/intro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}   
+
+@font-face {
+  font-family: 'anonymousprobold';
+  src: url('../fonts/anonymousprobold.woff2') format('woff2'),
+       url('../fonts/anonymousprobold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
 }
 
 /* Для лучшего поведения на мобильных устройствах */
