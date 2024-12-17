@@ -1,0 +1,215 @@
+.header {
+	position: relative;
+	background: #2e2e35;
+	height: 100px; 
+	width: 100%; 
+	position: relative;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+}
+
+.header__container {
+	display: flex;
+	height: 100%;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1100px;
+	padding: 0px 15px;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.header .left {
+	height: 100%;
+	display: flex;
+	align-items: center; 
+	justify-content: center;
+
+}
+
+.header .right {
+	display: flex;
+}
+
+.left .logo_shveya .logo-img {
+	max-width: 100%;
+}
+
+.logo_shveya {
+	position: relative;
+	z-index: 4;
+	max-width: 196px;
+}
+
+.right .menu {
+	background-color: #2e2e35;
+	display: flex;
+	gap: 30px;
+}
+
+.right .menulang {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	margin: 0px 0px 0px 30px;
+}
+
+.menulang {
+	position: relative;
+}
+
+.menulang button {
+	transition: all 0.3s ease 0s;
+}
+
+.menulang button:hover {
+	color: #e5a462;
+}
+
+._line {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 0;
+	height: 100%;
+	width: 2px;
+	background-color: #E8DCD0;
+}
+
+.menu .menu__link, button {
+	font-size: 24px; 
+	font-family: 'intro', sans-serif; 
+	color: #E8DCD0;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column; 
+	align-items: center; 
+	justify-content: center; 
+	height: 100%; 
+	transition: all 0.3s ease;
+	user-select: none;
+}
+
+.menu .menu__link:hover {
+	color: #e5a462;
+}
+
+.menu__link {
+	position: relative;
+}
+
+.menu__link::after {
+	content: '';
+	width: 15px;
+	height: 15px;
+	background-color: #e5a462;
+	border-radius: 50%;
+	position: absolute;
+	bottom: -20px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	opacity: 0;
+	transition: all 0.3s ease 0s;
+}
+
+.menu__link:hover.menu__link::after {
+	opacity: 1;
+	bottom: -15px;
+}
+
+
+
+.menu .menu__link.active::after {
+	opacity: 1;  
+}
+
+.icon-menu {
+	display: none;
+	position: relative;
+	z-index: 5;
+	height: 30px;
+}
+
+.icon-menu span {
+	display: block;
+	width: 40px;
+	height: 4px;
+	background-color: #E8DCD0;
+}
+
+.icon-menu::after, .icon-menu::before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 40px;
+	height: 4px;
+	background-color: #E8DCD0;
+	left: 0;
+	transition: all 0.3s ease 0s;
+}
+
+.icon-menu::after {
+	bottom: 0;
+}
+
+.icon-menu::before {
+	top: 0;
+}
+
+.btn-active span {
+	opacity: 0;
+}
+
+.btn-active::after {
+	top: 50%;
+	transform: translate(0, -50%) rotate(-45deg);
+}
+
+.btn-active::before {
+	top: 50%;
+	transform: translate(0, -50%) rotate(45deg);
+}
+
+@media (max-width: 992px) {
+	.menu a, button {
+		font-size: 18px;
+	}
+	.logo_shveya {
+		max-width: 146px;
+	}
+	
+}
+
+
+
+@media (max-width: 748px) {
+	.icon-menu {
+		display: block;
+	}
+	.right .menu {
+		flex-direction: column;
+	}
+	.menu a, button {
+		font-size: 22px;
+	}
+	._menu {
+		position: absolute;
+		top: 0;
+		left: 100%;
+		height: 100vh;
+		width: 100vw;
+		background-color: #2e2e35;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 30px;
+		transition: all 0.3s ease 0s;
+	}
+	.right .menulang  {
+		margin: 0;
+	}
+}
+
+.active {
+	left: 0;
+}
