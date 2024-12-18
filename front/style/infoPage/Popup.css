@@ -1,0 +1,113 @@
+.popup {
+	display: none;
+	/* Изначально окно скрыто */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	/* Ширина 100% от окна */
+	height: 100%;
+	/* Высота 100% от окна */
+	background-color: rgba(0, 0, 0, 0.7);
+	/* Полупрозрачный фон */
+	z-index: 1000;
+	animation: popupAnim 0.5s ease-out forwards;
+}
+
+/* Анимация для вылетающего окна */
+@keyframes popupAnim {
+	from {
+		transform: translate(-50%, -150%);
+		/* Начальная позиция (выше экрана) */
+	}
+
+	to {
+		transform: translate(0, 0);
+		/* Конечная позиция (по центру экрана) */
+	}
+}
+
+/* Стили для содержимого окна */
+.popup-content {
+	background-color: #E8DCD0;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	max-width: 600px;
+	/* Approximate width (can be changed) */
+	max-height: 400px;
+	/* Approximate height (can be changed) */
+	margin: auto;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	gap: 20px;
+	display: flex;
+	flex-direction: column;
+	/* Align content in a column */
+	align-items: center;
+	/* Horizontally center the items */
+	/* Vertically center the items */
+}
+
+.paypal {
+	font-size: 32px;
+	display: inline-block;
+	/* Размещаем ссылку как блок */
+	cursor: pointer;
+	/* Указатель курсора на изображении */
+	text-decoration: none;
+	/* Убираем подчеркивание у ссылки */
+}
+
+.paypalimg {
+	width: 100px;
+	/* Размер картинки (можно настроить) */
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.paypalimg img {
+	width: 100%;
+	/* Изображение будет адаптироваться по ширине */
+	height: auto;
+	border-radius: 5px;
+	/* Закругление углов картинки (по желанию) */
+	transition: transform 0.3s ease, opacity 0.3s ease;
+	/* Плавный переход */
+}
+
+.paypal:hover img {
+	transform: scale(1.1);
+	/* Увеличение картинки при наведении */
+	opacity: 0.9;
+	/* Немного прозрачности */
+}
+
+/* Стили для кнопки закрытия */
+.close-btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 40px;
+	cursor: pointer;
+}
+
+/* Стили для кнопки открытия окна */
+#openBtn {
+	padding: 10px 20px;
+	cursor: pointer;
+	border: none;
+
+	border-radius: 5px;
+}
+
+._paypal {
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}

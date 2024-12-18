@@ -1,0 +1,30 @@
+.partners {
+	background: #ebddd0;
+}
+
+.partners__container {
+	max-width: 1100px;
+	padding: 60px 15px 90px 15px;
+	margin: 0 auto;
+	border-top: 2px solid #2e2e35;
+}
+
+.partners__box {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.partners__partner img {
+	max-height: 130px;
+	max-width: 300px;
+}
+
+.partners__title {
+	font-size: 26px;
+	text-align: center;
+	margin: 0px 0px 30px 0px;
+	font-family: 'intro', sans-serif;
+}

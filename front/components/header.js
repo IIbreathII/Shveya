@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation';
 const Header = () => {
 
 	const location = usePathname();
-	console.log(location);
 
 	return (
 		<header className="header">
