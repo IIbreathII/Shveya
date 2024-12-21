@@ -21,7 +21,9 @@ a:active {
 /* Сброс базовых стилей для html и body */
 html,
 body {
+  width: 100%;
   height: 100%;
+
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -34,7 +36,6 @@ body {
   /* Для улучшения рендеринга шрифтов */
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 
 /* Сброс стилей для форм */
@@ -144,12 +145,12 @@ option {
 
 .wrapper {
   overflow-x: hidden;
-  height: auto;
+  height: 100%;
   background-color: #E8DCD0;
 }
 
-.menu-active {
-  overflow: hidden;
+.menu-active .wrapper {
+  overflow-y: hidden;
 }
 
 

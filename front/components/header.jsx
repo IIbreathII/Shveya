@@ -9,11 +9,22 @@ const Header = () => {
 
 	const location = usePathname();
 
+	function openMenu(e) {
+		e.stopPropagation()
+		document.querySelector("._menu").classList.toggle("active")
+		document.body.classList.toggle("menu-active")
+		if (e.target.classList.contains("icon-menu")) {
+			e.target.classList.toggle("btn-active")
+		} else {
+			e.target.closest(".icon-menu").classList.toggle("btn-active")
+		}
+	}
+
 	return (
 		<header className="header">
 			<div className="header__container">
 				<div className="left">
-					<Link href="/info">
+					<Link href="/">
 						<div className="logo_shveya">
 							<Image
 								src="/images/logo.png"
@@ -28,15 +39,15 @@ const Header = () => {
 					</Link>
 				</div>
 
-				<button className="icon-menu">
+				<button onClick={openMenu} className="icon-menu">
 					<span></span>
 				</button>
 
 				<div className="right _menu">
 					<nav className="menu">
-						{location == '/info'
+						{location == '/'
 							? <Link className='menu__link' href="/guides">Навчальний центр</Link>
-							: <Link className='menu__link' href="/info">Головна сторінка</Link>
+							: <Link className='menu__link' href="/">Головна сторінка</Link>
 						}
 					</nav>
 					<div className="menulang">

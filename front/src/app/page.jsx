@@ -7,10 +7,19 @@ import '$style/infoPage/Conbox.css'
 import '$style/infoPage/Popup.css'
 import '$style/infoPage/Media.css'
 import '$style/infoPage/Partners.css'
+import '$style/infoPage/Map.css'
+import { useRef } from 'react';
 
 export default function InfoPage() {
+
+  const iframe = useRef();
+
+  function changeMapURL(newURL) {
+    iframe.current.src = newURL;
+  }
+
   return (
-    <>
+    <main className='main'>
       <div className="infobox">
         <div className="infobox__container">
           <div className="left">
@@ -221,6 +230,7 @@ export default function InfoPage() {
         <div className="mapbox">
           <div className="left">
             <iframe id="mapIframe"
+              ref={iframe}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509425!2d-122.41941548467836!3d37.77492977975971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064a043bf3f%3A0x6e59c40cde44e5e0!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2sus!4v1601840347235!5m2!1sen!2sus"
               loading="lazy">
             </iframe>
@@ -228,10 +238,10 @@ export default function InfoPage() {
 
           <div className="right">
             <button className="button"
-              onclick="changeMapURL('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82352.68481656504!2d23.929834766914727!3d49.83265984405233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add7c09109a57:0x4223c517012378e2!2z0JvRjNCy0L7Qsiwg0JvRjNCy0L7QstGB0LrQsNGPINC-0LHQu9Cw0YHRgtGMLCA3OTAwMA!5e0!3m2!1sru!2sua!4v1733485105656!5m2!1sru!2sua')">Львівське відділення</button>
+              onClick={e => changeMapURL('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82352.68481656504!2d23.929834766914727!3d49.83265984405233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add7c09109a57:0x4223c517012378e2!2z0JvRjNCy0L7Qsiwg0JvRjNCy0L7QstGB0LrQsNGPINC-0LHQu9Cw0YHRgtGMLCA3OTAwMA!5e0!3m2!1sru!2sua!4v1733485105656!5m2!1sru!2sua')}>Львівське відділення</button>
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }

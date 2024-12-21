@@ -1,7 +1,12 @@
+"use client"
+
 import '$style/globals.css'
 import Header from '$component/header'
+import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {
+
+  const path = usePathname()
 
   return (
 
@@ -19,11 +24,12 @@ export default function RootLayout({ children }) {
 
       <body>
         <div className='wrapper'>
-          <Header></Header>
-          <main>{children}</main>
+          {!path.includes('dashboard') &&
+            <Header></Header>
+          }
+          {children}
         </div>
       </body>
     </html>
-
   );
 }
