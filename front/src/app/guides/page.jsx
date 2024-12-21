@@ -4,12 +4,18 @@ import { useState } from 'react';
 import '$style/Guides.css'
 import '$style/Guides-menu.css'
 import '$style/Guides-infobox.css'
-import Aside from '$component/guides/Aside/aside';
+import Aside from '$component/guides/Aside/Aside';
+import MasterClassSect from '$component/guides/MasterClassSect/MasterClassSect';
+import VideoSect from '$component/guides/VideoSect/VideoSect';
+import ExamplesSect from '$component/guides/ExamplesSect/ExamplesSect';
+import DetailsSect from '$component/guides/DetailsSect/DetailsSect';
+import AuthorSect from '$component/guides/AuthorSect/AuthorSect';
+import ComSect from '$component/guides/ComSect/ComSect';
 
 export default function MasterClassPage() {
   const [author, setAuthor] = useState("");
 
-  // Заглушки для данных мастер-класса
+  // Заглушки для даних майстер-классів 
   const masterClassData = {
     title: "СЮДИ НАЗВУ ВИРОБУ",
     file: {
@@ -34,7 +40,6 @@ export default function MasterClassPage() {
 
   return (
     <div>
-      {/* Инфоблок */}
       <div className="infobox">
         <div className="infobox__container">
           <div className="line2"></div>
@@ -45,67 +50,22 @@ export default function MasterClassPage() {
         </div>
       </div>
 
-      {/* Контент */}
       <div className="content">
-        {/* Левая колонка */}
+        {/* Ліва колонка */}
         <Aside/>
-
-        {/* Основной контент */}
+        {/* Основний контент */}
         <main className="main-content">
-          <section className="master-class">
-            <h1 style={{ marginBottom: '20px', fontSize: '26px', textAlign: 'center' }}>
-              {masterClassData.title}
-            </h1>
-            <h2>Лекала:</h2>
-            <ul>
-              <li>
-                Розмір 1 - <a href={masterClassData.file.url}>завантажити</a>
-              </li>
-            </ul>
-          </section>
+          <MasterClassSect masterClassData={masterClassData}/> 
 
-          <section className="video">
-            <h2>Майстер-клас</h2>
-            <iframe
-              width="330"
-              height="315"
-              src={masterClassData.video_url}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </section>
+          <VideoSect masterClassData={masterClassData}/>
 
-          <section className="examples">
-            <h2>Приклади готового одягу:</h2>
-            <div className="gallery">
-              <img src={masterClassData.example.url} alt="Готовий одяг 1" />
-            </div>
-          </section>
+          <ExamplesSect masterClassData={masterClassData}/>
 
-          <section className="details1">
-            <p>{masterClassData.details}</p>
-            <p>{masterClassData.summary}</p>
-          </section>
+          <DetailsSect masterClassData={masterClassData}/>
 
-          <section className="author">
-            <h2>Автор лекал:</h2>
-            <textarea
-              className='guides-textarea'
-              id="authorTextarea"
-              value={author}
-              onChange={handleAuthorInput}
-              placeholder="@"
-            />
-          </section>
+          <AuthorSect author={author} handleAuthorInput={handleAuthorInput}/>
 
-          <section className="comments">
-            <h2>Коментарі і питання:</h2>
-            <textarea className='guides-textarea' placeholder="Залиште ваш коментар..."></textarea>
-            <button>Надіслати</button>
-          </section>
+          <ComSect/>
         </main>
       </div>
     </div>

@@ -224,13 +224,3 @@
 }
 
 /* Адаптация для мобильных устройств */
-@media (max-width: 900px) {
-    .main-content {
-        padding: 15px;
-    }
-
-    .main-content .gallery img {
-        max-width: 100%;
-        /* Увеличение размера изображений */
-    }
-}
