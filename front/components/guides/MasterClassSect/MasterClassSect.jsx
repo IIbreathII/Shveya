@@ -11,6 +11,9 @@ const MasterClassSect = ({masterClassData}) => {
               <li>
                 Розмір 1 - <a href={masterClassData.file.url}>завантажити</a>
               </li>
+              <li>
+                Розмір 2 - <a href={masterClassData.file.url}>завантажити</a>
+              </li>
             </ul>
           </section>
 	);

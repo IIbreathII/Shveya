@@ -146,11 +146,18 @@ option {
 .wrapper {
   overflow-x: hidden;
   height: 100%;
-  background-color: #E8DCD0;
+  background-color: #e8dcd0;
 }
 
 .menu-active .wrapper {
   overflow-y: hidden;
+}
+
+._main-title {
+  text-align: center;
+  font-size: 28px;
+  font-family: intro, sans-serif;
+  color: #2e2e35;
 }
 
 

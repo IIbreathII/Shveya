@@ -1,0 +1,55 @@
+.video__media {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+}
+
+.video {
+	margin: 0px 0px 50px 0px;
+}
+
+.video__body {
+	position: relative;
+	max-width: 750px;
+}
+
+.video__media iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.spinner-border {
+	display: inline-block;
+	width: 5rem;
+	height: 5rem;
+	vertical-align: text-bottom;
+	border: 0.25em solid currentColor;
+	border-right-color: transparent;
+	border-radius: 50%;
+	animation: spinner-border 0.75s linear infinite;
+	position: absolute;
+	top: calc(50% - 2.5rem);
+	left: calc(50% - 2.5rem);
+}
+
+@keyframes spinner-border {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

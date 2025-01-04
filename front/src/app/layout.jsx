@@ -1,7 +1,7 @@
 "use client"
 
 import '$style/globals.css'
-import Header from '$component/header'
+import Header from '$component/Header'
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({ children }) {

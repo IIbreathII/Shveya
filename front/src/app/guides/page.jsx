@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import '$style/Guides.css'
-import '$style/Guides-menu.css'
-import '$style/Guides-infobox.css'
 import Aside from '$component/guides/Aside/Aside';
 import MasterClassSect from '$component/guides/MasterClassSect/MasterClassSect';
 import VideoSect from '$component/guides/VideoSect/VideoSect';
@@ -17,7 +15,7 @@ export default function MasterClassPage() {
 
   // Заглушки для даних майстер-классів 
   const masterClassData = {
-    title: "СЮДИ НАЗВУ ВИРОБУ",
+    title: "Кіберштани",
     file: {
       url: "/path/to/lekalo1.pdf"
     },
@@ -27,6 +25,7 @@ export default function MasterClassPage() {
     },
     details: "Матеріали: Для пошиття адаптивних штанів можна закупити матеріали самостійно або отримати готовий комплект від швейної роти. Комплект включає чотири викроєні деталі штанів, кишеню, чорний шнурок для бокових зав'язок, резинку в пояс, липучки, колючу та м'яку клеєву стрічку для дублювання деяких ділянок, а також кольорові шнурки для поясу",
     summary: "Після підготовки деталей, потрібно підгинаючи низ на величину припуску 2 см, пришити його на машинці. Важливо вибрати штани із закритими липучками та випрасувати їх перед пакуванням",
+    authors: "Автор 1, Автор 2"
   };
 
   const handleAuthorInput = (event) => {
@@ -39,17 +38,7 @@ export default function MasterClassPage() {
   };
 
   return (
-    <div>
-      <div className="infobox">
-        <div className="infobox__container">
-          <div className="line2"></div>
-          <div className="center">
-            <h1>Майстер клас пошивки</h1>
-          </div>
-          <div className="line1"></div>
-        </div>
-      </div>
-
+    <main className='main'>
       <div className="content">
         {/* Ліва колонка */}
         <Aside/>
@@ -63,11 +52,11 @@ export default function MasterClassPage() {
 
           <DetailsSect masterClassData={masterClassData}/>
 
-          <AuthorSect author={author} handleAuthorInput={handleAuthorInput}/>
+          <AuthorSect masterClassData={masterClassData}/>
 
           <ComSect/>
         </main>
       </div>
-    </div>
+    </main>
   );
 }

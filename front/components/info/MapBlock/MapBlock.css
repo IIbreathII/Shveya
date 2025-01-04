@@ -1,0 +1,26 @@
+.map__container {
+	background: #2e2e35;
+}
+
+.map__body {
+	height: 600px;
+	max-width: 1300px;
+	padding: 0px 15px 30px 15px;
+	margin: 0 auto;
+}
+
+.marker__title {
+	font-size: 20px;
+	margin: 0px 0px 10px 0px;
+}
+
+.marker__street {
+	font-size: 16px;
+	margin: 0px 0px 10px 0px;
+}
+
+.map__title {
+	padding: 30px 0px 0px 0px;
+	color: #e8dcd0;
+	margin: 0px 0px 30px 0px;
+}
