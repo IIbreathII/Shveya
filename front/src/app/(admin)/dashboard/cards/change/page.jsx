@@ -10,27 +10,46 @@ export default function ChangePage() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Функция для создания карточки
+  const createCard = async (title, description, file) => {
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
 
     try {
+      // Формируем данные в формате FormData
       const formData = new FormData();
+      formData.append("path", file);
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("file", file);
 
-      const response = await axios.post("http://localhost:3000/api/create-card", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+      // Отправляем POST-запрос на сервер
+      const response = await fetch("http://localhost:3000/cards", {
+        method: "POST",
+        body: formData,
       });
 
-      console.log("Card created:", response.data);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create card.");
+      }
+
+      // Обрабатываем успешный ответ
+      const result = await response.json();
+      console.log("Card created:", result);
       alert("Card successfully created!");
+      return result;
     } catch (error) {
-      console.error("Error creating card:", error);
-      alert("Failed to create card.");
+      console.error("Error creating card:", error.message);
+      alert(`Error: ${error.message}`);
     }
+  };
+
+  // Обработчик события формы
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await createCard(title, description, file);
   };
 
   return (
@@ -38,6 +57,7 @@ export default function ChangePage() {
       <div className="main__form container-lg mt-5">
         <h1 className="form-title admin-title mb-4">Додати статистичну картку</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
+          {/* Поле загрузки файла */}
           <div className="input-group mb-3">
             <input
               required
@@ -47,10 +67,16 @@ export default function ChangePage() {
               onChange={(e) => setFile(e.target.files[0])}
               accept="image/*"
             />
-            <label className="input-group-text" htmlFor="inputGroupFile02">Зображення</label>
+            <label className="input-group-text" htmlFor="inputGroupFile02">
+              Зображення
+            </label>
           </div>
+
+          {/* Поле заголовка */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="inputGroup-sizing-default">Заголовок:</span>
+            <span className="input-group-text" id="inputGroup-sizing-default">
+              Заголовок:
+            </span>
             <input
               required
               type="text"
@@ -61,8 +87,12 @@ export default function ChangePage() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+
+          {/* Поле описания */}
           <div className="input-group mb-3">
-            <span className="input-group-text" id="inputGroup-sizing-default">Значення:</span>
+            <span className="input-group-text" id="inputGroup-sizing-default">
+              Значення:
+            </span>
             <input
               required
               type="text"
@@ -73,7 +103,10 @@ export default function ChangePage() {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-          <button type="submit" className="btn btn-primary">Save</button>
+
+          <button type="submit" className="btn btn-primary">
+            Save
+          </button>
         </form>
       </div>
     </main>
