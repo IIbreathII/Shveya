@@ -27,7 +27,7 @@
 	min-width: 290px;
 	background: #E8DCD0;
 	padding: 35px 20px;
-	border-radius: 1px;
+	border-radius: 8px;
 	display: flex;
 	width: 100%;
 	gap: 20px;
@@ -35,7 +35,7 @@
 	justify-content: center;
 }
 
-.card::after, .card::before {
+/* .card::after, .card::before {
 	content: "";
 	display: block;
 	height: 5px;
@@ -57,7 +57,7 @@
 	left: 50%;
 	transform: translate(-50%,0);
 	border-radius: 0px 0px 5px 5px;
-}
+} */
 
 .card__top {
 	color: #2e2e35;
