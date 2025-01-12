@@ -4,6 +4,8 @@ import { Pagination, Autoplay } from "swiper/modules"
 import { motion } from "framer-motion"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css"
+import { useEffect, useState } from "react";
+import getData from "api";
 
 const InfoBlock = () => {
 	const blockAnitmation = {
@@ -18,26 +20,11 @@ const InfoBlock = () => {
 		}),
 	}
 
-	const slides = [
-		{
-			id: 1,
-			img: '/images/iconshveya.png',
-			title: 'Швейна рота',
-			text: 'Це волонтерський проєкт, який займається пошиттям адаптивного одягу для поранених захисників, захисниць України, а також цивільних, які постраждали внаслідок російської агресії. Наші зусилля спрямовані на забезпечення поранених якісним, комфортним і функціональним одягом, який допомагає зберегти гідність і полегшити реабілітацію на всіх етапах від евакуації до одужання.'
-		},
-		{
-			id: 2,
-			img: '/images/monobanka.png',
-			title: 'Підтримати нас донатом',
-			text: 'Це волонтерський проєкт, який займається пошиттям адаптивного одягу для поранених захисників, захисниць України, а також цивільних, які постраждали внаслідок російської агресії. Наші зусилля спрямовані на забезпечення поранених якісним, комфортним і функціональним одягом, який допомагає зберегти гідність і полегшити реабілітацію на всіх етапах від евакуації до одужання.'
-		},
-		{
-			id: 3,
-			img: '/images/iconshveya.png',
-			title: 'Швейна рота',
-			text: 'Це волонтерський проєкт, який займається пошиттям адаптивного одягу для поранених захисників, захисниць України, а також цивільних, які постраждали внаслідок російської агресії. Наші зусилля спрямовані на забезпечення поранених якісним, комфортним і функціональним одягом, який допомагає зберегти гідність і полегшити реабілітацію на всіх етапах від евакуації до одужання.'
-		},
-	]
+	const [slides, setSlides] = useState([]);
+
+	useEffect(e => {
+		getData("slides", setSlides)
+	}, [])
 
 	return (
 		<div className="infobox">
@@ -60,12 +47,13 @@ const InfoBlock = () => {
 					className="swiper__container"
 				>
 					{slides.map(slide =>
+					(
 						<SwiperSlide key={slide.id}>
 							<div className="infobox__slide">
 								<div className="left">
 									<div className="icon_shveya">
 										<Image
-											src={slide.img}
+											src={"http://localhost:3000/" + slide.path}
 											alt="logo"
 											width={356}
 											height={61}
@@ -87,6 +75,7 @@ const InfoBlock = () => {
 								</motion.div>
 							</div>
 						</SwiperSlide>
+					)
 					)}
 				</Swiper>
 				<div className="swiper-pagination"></div>

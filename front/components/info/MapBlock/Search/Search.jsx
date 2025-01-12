@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import "./Search.css"
 import Image from "next/image";
 
@@ -6,18 +6,23 @@ const SearchMarkers = ({ markers, handleZoom }) => {
 	const [query, setQuery] = useState("");
 	const [filteredMarkers, setFilteredMarkers] = useState([]);
 	const [isFocused, setIsFocused] = useState(false);
+	const listRef = useRef(null);
 
 	const handleFocus = () => {
 		setIsFocused(true);
 	};
 
-	const handleBlur = () => {
+	const handleBlur = (e) => {
+		if (listRef.current && listRef.current.contains(e.relatedTarget)) {
+			return;
+		}
 		setIsFocused(false);
 	};
 
 	const handleInputChange = (e) => {
 		const input = e.target.value;
 		setQuery(input);
+		setIsFocused(true);
 
 		if (input.trim() === "") {
 			setFilteredMarkers([]);
@@ -29,8 +34,13 @@ const SearchMarkers = ({ markers, handleZoom }) => {
 		}
 	};
 
+	function handleSearch(lat, lng) {
+		setIsFocused(false)
+		handleZoom(lat, lng)
+	}
+
 	return (
-		<div className='search'>
+		<div className="search">
 			<input
 				onFocus={handleFocus}
 				onBlur={handleBlur}
@@ -38,17 +48,19 @@ const SearchMarkers = ({ markers, handleZoom }) => {
 				value={query}
 				onChange={handleInputChange}
 				placeholder="Знайти відділення..."
-				className='search__input'
+				className="search__input"
 			/>
 			{filteredMarkers.length > 0 && isFocused && (
 				<ul
-					className='search__list'
+					ref={listRef}
+					className="search__list"
 				>
 					{filteredMarkers.map((marker) => (
 						<li
 							key={marker.id}
 							className="search__item"
-							onClick={() => handleZoom(marker.lat, marker.lng)}
+							onMouseDown={(e) => e.preventDefault()}
+							onClick={() => handleSearch(marker.lat, marker.lng)}
 						>
 							<span>{marker.title}</span>
 							<Image

@@ -37,22 +37,26 @@
 
 .card::after, .card::before {
 	content: "";
-	width: 80px;
-	height: 50px;
+	display: block;
+	height: 5px;
 	position: absolute;
-	
+	background-color: #2e2e35;
+	width: 130px;
 }
 
 .card::after {
-	top: 0;
-	right: 0;
-	border-top: 5px solid #2e2e35;
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%,0);
+	border-radius: 5px 5px 0px 0px;
 }
 
 .card::before {
-	bottom: 0;
-	left: 0;
-	border-bottom: 5px solid #2e2e35;
+	
+	top: 0;
+	left: 50%;
+	transform: translate(-50%,0);
+	border-radius: 0px 0px 5px 5px;
 }
 
 .card__top {

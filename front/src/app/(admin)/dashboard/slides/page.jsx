@@ -8,14 +8,14 @@ import Link from "next/link";
 import DatabaseItem from "$component/dashboard/DatabaseItem/DatabaseItem";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import getCards, { deleteDataById } from "api";
+import getData, { deleteDataById } from "api";
 
 export default function CardsPage() {
-	const [cards, setCards] = useState([]);
-	const [selectedCardId, setSelectedCardId] = useState(null);
+	const [slides, setSlides] = useState([]);
+	const [selectedMarkerId, setSelectedMarkerId] = useState(null);
 
 	useEffect(() => {
-		getCards("cards", setCards);
+		getData("slides", setSlides);
 	}, []);
 
 	return (
@@ -32,21 +32,21 @@ export default function CardsPage() {
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Відмінити</button>
-							<button type="button" data-bs-dismiss="modal" onClick={() => selectedCardId && deleteDataById("cards", selectedCardId, setCards)} className="btn btn-outline-danger">Видалити</button>
+							<button type="button" data-bs-dismiss="modal" onClick={() => selectedMarkerId && deleteDataById("slides", selectedMarkerId, setSlides)} className="btn btn-outline-danger">Видалити</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className="main__items items container-md mt-5">
 				<div className="items__header mb-4">
-					<h1 className="admin-title">Статистичні картки ({cards.length})</h1>
-					<Link href="/dashboard/cards/add" type="button" className="btn btn-success">
+					<h1 className="admin-title">Слайди ({slides.length})</h1>
+					<Link href="/dashboard/slides/add" type="button" className="btn btn-success">
 						<span className="_plus">+</span> Додати
 					</Link>
 				</div>
 				<div className="list-group">
-					{cards.map((card) => (
-						<DatabaseItem setSelectedId={setSelectedCardId} key={card.id} title={`Картка ${card.id} (${card.title})`} link={`/dashboard/cards/add/${card.id}`} id={card.id}/>
+					{slides.map((slide) => (
+						<DatabaseItem setSelectedId={setSelectedMarkerId} key={slide.id} title={`Слайд ${slide.id} (${slide.title})`} link={`/dashboard/slides/add/${slide.id}`} id={slide.id}/>
 					))}
 				</div>
 			</div>

@@ -53,8 +53,14 @@ const Header = () => {
 				<div className="right _menu">
 					<nav className="menu">
 						{location == '/'
-							? <Link onClick={closeMenu} className='menu__link' href="/guides">Навчальний центр</Link>
-							: <Link onClick={closeMenu} className='menu__link' href="/">Головна сторінка</Link>
+							? <>
+								<Link onClick={closeMenu} className='menu__link link-active' href="/">Головна сторінка</Link>
+								<Link onClick={closeMenu} className='menu__link' href="/guides">Навчальний центр</Link>
+							</>
+							: <>
+								<Link onClick={closeMenu} className='menu__link' href="/">Головна сторінка</Link>
+								<Link onClick={closeMenu} className='menu__link link-active' href="/guides">Навчальний центр</Link>
+							</>
 						}
 					</nav>
 					<div className="menulang">

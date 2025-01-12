@@ -4,37 +4,40 @@ import { useState } from "react";
 import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
+import bootstrap from "bootstrap";
+import Alert from "$component/dashboard/Alert/Alert";
+import { postData } from "api";
 
 export default function ChangePage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("description", description);
-      formData.append("file", file);
-
-      const response = await axios.post("http://localhost:3000/api/create-card", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      console.log("Card created:", response.data);
-      alert("Card successfully created!");
-    } catch (error) {
-      console.error("Error creating card:", error);
-      alert("Failed to create card.");
+    if (!file) {
+      alert("Пожалуйста, выберите файл");
+      return;
     }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("path", file);
+
+    postData("cards", formData, setShowAlert)
   };
 
   return (
     <main className="main">
+      {showAlert && (
+        <Alert
+          message="Картка була додана успішно!"
+          onClose={() => setShowAlert(false)}
+        />
+      )}
       <div className="main__form container-lg mt-5">
         <h1 className="form-title admin-title mb-4">Додати статистичну картку</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>

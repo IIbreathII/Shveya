@@ -20,12 +20,13 @@ export default function AdminLayout({ children }) {
 										Керування елементами сторінки
 									</a>
 									<ul className="dropdown-menu">
+										<li><Link className="dropdown-item" href="/dashboard/slides">Слайди</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/cards">Статистичні картки</Link></li>
-										<li><a className="dropdown-item" href="#">Медіа посилання</a></li>
-										<li><a className="dropdown-item" href="#">Партнери</a></li>
-										<li><a className="dropdown-item" href="#">Посилання на мапу</a></li>
-										<li><a className="dropdown-item" href="#">Категорії кібер-одягу</a></li>
-										<li><a className="dropdown-item" href="#">Навчальні матеріали</a></li>
+										<li><Link className="dropdown-item" href="/dashboard/media">Медіа посилання</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/partners">Партнери</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/markers">Маркери на мапі</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/categories">Категорії кібер-одягу</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/guides">Навчальні матеріали</Link></li>
 									</ul>
 								</li>
 							</ul>
