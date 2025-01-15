@@ -8,14 +8,14 @@ import Link from "next/link";
 import DatabaseItem from "$component/dashboard/DatabaseItem/DatabaseItem";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import getData, { deleteDataById } from "api";
+import getCards, { deleteDataById } from "api";
 
 export default function CardsPage() {
-	const [partners, setPartners] = useState([]);
-	const [selectedPartnerId, setSelectedPartnerId] = useState(null);
+	const [categories, setCategories] = useState([]);
+	const [selectedCardId, setSelectedCardId] = useState(null);
 
 	useEffect(() => {
-		getData("partners", setPartners);
+		getCards("categories", setCategories);
 	}, []);
 
 	return (
@@ -32,21 +32,21 @@ export default function CardsPage() {
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Відмінити</button>
-							<button type="button" data-bs-dismiss="modal" onClick={() => setSelectedPartnerId && deleteDataById("partners", selectedPartnerId, setPartners)} className="btn btn-outline-danger">Видалити</button>
+							<button type="button" data-bs-dismiss="modal" onClick={() => selectedCardId && deleteDataById("categories", selectedCardId, setCategories)} className="btn btn-outline-danger">Видалити</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className="main__items items container-md mt-5">
 				<div className="items__header mb-4">
-					<h1 className="admin-title">Партнери ({partners.length})</h1>
-					<Link href="/dashboard/partners/add" type="button" className="btn btn-success">
+					<h1 className="admin-title">Категорії ({categories.length})</h1>
+					<Link href="/dashboard/categories/add" type="button" className="btn btn-success">
 						<span className="_plus">+</span> Додати
 					</Link>
 				</div>
 				<div className="list-group">
-					{partners.map((partner) => (
-						<DatabaseItem setSelectedId={setSelectedPartnerId} key={partner.id} title={`Партнер ${partner.id}`} link={`/dashboard/markers/add/${partner.id}`} id={partner.id}/>
+					{categories.map((categorie, index) => (
+						<DatabaseItem setSelectedId={setSelectedCardId} key={categorie.id} title={`Категорія ${index + 1} (${categorie.categoryname})`} link={`/dashboard/cards/add/${categorie.id}`} id={categorie.id}/>
 					))}
 				</div>
 			</div>

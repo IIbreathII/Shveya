@@ -6,13 +6,16 @@ const ExamplesSect = ({ masterClassData }) => {
     <section className="examples">
       <h2>Приклади готового одягу:</h2>
       <div className="gallery">
-        <Image
-          src="/images/guides/Cyberpants.jpg"
-          alt="приклад"
-          width={356}
-          height={61}
-          priority
-        />
+        {masterClassData.example.map((exampl, index) =>
+          <Image
+            key={index}
+            src={"http://localhost:3000/" + exampl}
+            alt="приклад"
+            width={356}
+            height={61}
+            priority
+          />
+        )}
       </div>
     </section>
   );

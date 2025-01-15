@@ -26,7 +26,7 @@ export default function AdminLayout({ children }) {
 										<li><Link className="dropdown-item" href="/dashboard/partners">Партнери</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/markers">Маркери на мапі</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/categories">Категорії кібер-одягу</Link></li>
-										<li><Link className="dropdown-item" href="/dashboard/guides">Навчальні матеріали</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/masterclass">Майстер-класи</Link></li>
 									</ul>
 								</li>
 							</ul>

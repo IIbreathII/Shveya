@@ -47,6 +47,7 @@
 	color: #e8dcd0;
 	font-family: 'anonymousprobold', sans-serif;
 	line-height: 1.5;
+	display: block;
 }
 
 .spoller__link:not(:last-child) {

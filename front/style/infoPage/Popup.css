@@ -11,32 +11,28 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	/* Полупрозрачный фон */
 	z-index: 1000;
-	animation: popupAnim 0.5s ease-out forwards;
+	animation: popupAnim 0.1s linear forwards;
 }
 
 /* Анимация для вылетающего окна */
 @keyframes popupAnim {
 	from {
-		transform: translate(-50%, -150%);
-		/* Начальная позиция (выше экрана) */
+		opacity: 0;
 	}
 
 	to {
-		transform: translate(0, 0);
-		/* Конечная позиция (по центру экрана) */
+		opacity: 1;
 	}
 }
 
 /* Стили для содержимого окна */
 .popup-content {
 	background-color: #E8DCD0;
-	padding: 20px;
-	border-radius: 10px;
+	padding: 35px;
+	border-radius: 5px;
 	text-align: center;
 	max-width: 600px;
-	/* Approximate width (can be changed) */
 	max-height: 400px;
-	/* Approximate height (can be changed) */
 	margin: auto;
 	position: absolute;
 	top: 50%;
@@ -45,20 +41,24 @@
 	gap: 20px;
 	display: flex;
 	flex-direction: column;
-	/* Align content in a column */
 	align-items: center;
-	/* Horizontally center the items */
-	/* Vertically center the items */
 }
 
 .paypal {
 	font-size: 32px;
-	display: inline-block;
-	/* Размещаем ссылку как блок */
+	display: grid;
+	grid-template-columns: 85px 1fr;
 	cursor: pointer;
-	/* Указатель курсора на изображении */
 	text-decoration: none;
-	/* Убираем подчеркивание у ссылки */
+	width: 100%;
+}
+
+.popup__close {
+	font-size: 32px;
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	cursor: pointer;
 }
 
 .paypalimg {

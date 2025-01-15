@@ -2,7 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
 
-const DatabaseItem = ({ title, link, id, setSelectedId }) => {
+const DatabaseItem = ({ title, link, id, setSelectedId, setSelectedCategoryId, categoryId }) => {
+	function handleClick(id) {
+		setSelectedId(id)
+		if (setSelectedCategoryId && categoryId) {
+			setSelectedCategoryId(categoryId)
+		}
+	}
+
 	return (
 		<div className="list-group-item d-flex justify-content-between align-items-center">
 			<Link href="/dashboard/cards">{title}</Link>
@@ -16,7 +23,7 @@ const DatabaseItem = ({ title, link, id, setSelectedId }) => {
 					/>
 					Змінити
 				</Link>
-				<button onClick={() => setSelectedId(id)} data-bs-toggle="modal" data-bs-target="#deleteApprove" type="button"  className="btn btn-outline-danger">Видалити</button>
+				<button onClick={() => handleClick(id)} data-bs-toggle="modal" data-bs-target="#deleteApprove" type="button"  className="btn btn-outline-danger">Видалити</button>
 			</div>
 		</div>
 	);
