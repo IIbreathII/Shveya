@@ -16,9 +16,9 @@ export default function AdminLayout({ children }) {
 									<a className="nav-link active" aria-current="page" href="/">Повернутися до сайту</a>
 								</li>
 								<li className="nav-item dropdown">
-									<a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 										Керування елементами сторінки
-									</a>
+									</Link>
 									<ul className="dropdown-menu">
 										<li><Link className="dropdown-item" href="/dashboard/slides">Слайди</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/cards">Статистичні картки</Link></li>

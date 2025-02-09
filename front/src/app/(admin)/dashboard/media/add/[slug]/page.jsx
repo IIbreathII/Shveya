@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
-import bootstrap from "bootstrap";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
 import { useParams, useRouter } from "next/navigation";
 
@@ -91,6 +92,7 @@ export default function ChangePage() {
 					<button type="submit" className="btn btn-primary">Save</button>
 				</form>
 			</div>
+			<Bootstrap/>
 		</main>
 	);
 }

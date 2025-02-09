@@ -35,22 +35,6 @@ const MapBlock = () => {
 			adress: "Вулиця *****, будинок 14",
 			phone: "+380667328474"
 		},
-		{
-			id: 4,
-			lat: 52.463393,
-			lng: 46.427997,
-			title: "Вашингтон",
-			adress: "Вулиця *****, будинок 14",
-			phone: "+380667328474"
-		},
-		{
-			id: 5,
-			lat: 9.463393,
-			lng: 13.427997,
-			title: "Олкотаун",
-			adress: "Вулиця *****, будинок 14",
-			phone: "+380667328474"
-		},
 	]
 
 	const customIcon = L.icon({
@@ -73,8 +57,8 @@ const MapBlock = () => {
 	return (
 		<div className="map">
 			<div className="map__container">
-				<div className="map__title _main-title">Ми на карті світу</div>
-				<SearchMarkers markers={markers} handleZoom={handleZoom}/>
+				<h2 className="map__title _main-title">Знайти нас на мапі</h2>
+				<SearchMarkers markers={markers} handleZoom={handleZoom} />
 				<div className="map__body">
 					<MapContainer
 						center={[0, 0]}

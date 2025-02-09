@@ -22,7 +22,7 @@ a:active {
 html,
 body {
   width: 100%;
-  height: 100%;
+  height: auto;
 
   margin: 0;
   padding: 0;
@@ -143,13 +143,17 @@ option {
   line-height: inherit;
 }
 
+body {
+  padding: 75px 0px 0px 0px;
+}
+
 .wrapper {
-  overflow-x: hidden;
+  position: relative;
   height: 100%;
   background-color: #e8dcd0;
 }
 
-.menu-active .wrapper {
+.menu-active {
   overflow-y: hidden;
 }
 
@@ -160,12 +164,46 @@ option {
   color: #2e2e35;
 }
 
+._background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("/images/footer/bg.png");
+  background-size: cover;
+  margin: 0px 0px -85px 0px;
+  width: 100%;
+  height: 100%;
+}
+
+._background::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2e2e3575;
+}
+
+@media (max-width: 678px) {
+  ._main-title {
+    font-size: 24px;
+  }
+}
 
 
 @font-face {
   font-family: 'intro';
   src: url('../fonts/intro.woff2') format('woff2'),
     url('../fonts/intro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'unbounded';
+  src: url('../fonts/unbounded.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

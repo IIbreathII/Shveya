@@ -5,7 +5,8 @@ import { motion } from "framer-motion"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css"
 import { useEffect, useState } from "react";
-import getData from "api";
+import { getData } from "api";
+import { useLang } from "$hooks/useLang";
 
 const InfoBlock = () => {
 	const blockAnitmation = {
@@ -22,19 +23,21 @@ const InfoBlock = () => {
 
 	const [slides, setSlides] = useState([]);
 
+	const [currentLang, setLang] = useLang();
+
 	useEffect(e => {
 		getData("slides", setSlides)
 	}, [])
 
 	return (
-		<div className="infobox">
+		<div className="infobox _swiper">
 			<div className="infobox__container">
 				<Swiper
 					modules={[Pagination, Autoplay]}
 					spaceBetween={50}
 					slidesPerView={1}
 					pagination={{
-						el: ".swiper-pagination",
+						el: ".info-pagination",
 						type: "bullets",
 						clickable: true,
 						bulletClass: "swiper-bullet",
@@ -53,7 +56,7 @@ const InfoBlock = () => {
 								<div className="left">
 									<div className="icon_shveya">
 										<Image
-											src={"http://localhost:3000/" + slide.path}
+											src={process.env.BACK_URL_IMG + slide.path}
 											alt="logo"
 											width={356}
 											height={61}
@@ -78,7 +81,7 @@ const InfoBlock = () => {
 					)
 					)}
 				</Swiper>
-				<div className="swiper-pagination"></div>
+				<div className="swiper-pagination info-pagination"></div>
 			</div>
 		</div>
 	);

@@ -25,6 +25,16 @@
 	}
 }
 
+@keyframes popupContentAnim {
+	from {
+		transform: translate(-50%, -100%);
+	}
+
+	to {
+		transform: translate(-50%, -50%);
+	}
+}
+
 /* Стили для содержимого окна */
 .popup-content {
 	background-color: #E8DCD0;
@@ -37,20 +47,48 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -200%);
 	gap: 20px;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
+	border: 8px solid #404046;
+	animation: popupContentAnim 0.3s ease-out forwards;
 }
 
-.paypal {
-	font-size: 32px;
-	display: grid;
-	grid-template-columns: 85px 1fr;
+.popup-link {
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	font-family: "anonymousprobold", sans-serif;
 	cursor: pointer;
 	text-decoration: none;
-	width: 100%;
+}
+
+.link-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.popup__button {
+	background-color: #2e2e35;
+	padding: 4px;
+	border-radius: 4px;
+	position: relative;
+	transition: all 0s linear 0s;
+}
+
+.show-ok {
+	background-color: #186600;
+}
+
+._paypal span {
+	display: block;
+	padding: 4px 8px;
+	border: 1px solid #404046;
+	border-radius: 4px;
 }
 
 .popup__close {
@@ -70,7 +108,7 @@
 	align-items: center;
 }
 
-.paypalimg img {
+.paypalimg .logo-img {
 	width: 100%;
 	/* Изображение будет адаптироваться по ширине */
 	height: auto;
@@ -80,7 +118,7 @@
 	/* Плавный переход */
 }
 
-.paypal:hover img {
+.popup-link:hover .logo-img {
 	transform: scale(1.1);
 	/* Увеличение картинки при наведении */
 	opacity: 0.9;
@@ -98,16 +136,21 @@
 
 /* Стили для кнопки открытия окна */
 #openBtn {
-	padding: 10px 20px;
 	cursor: pointer;
 	border: none;
-
 	border-radius: 5px;
 }
 
-._paypal {
-	font-size: 22px;
-	display: flex;
-	align-items: center;
-	gap: 10px;
+
+
+@media (max-width: 652px) {
+	.popup-content {
+		width: 95%;
+	}
+}
+
+@media (max-width: 492px) {
+	.popup-link {
+		flex-direction: column;
+	}
 }

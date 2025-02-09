@@ -11,7 +11,7 @@ const VideoSect = ({ masterClassData }) => {
         <div className="video__media">
           <iframe
             frameBorder="0"
-            src={masterClassData.videoUrl}
+            src={masterClassData.url}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"

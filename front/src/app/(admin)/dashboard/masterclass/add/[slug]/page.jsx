@@ -1,96 +1,142 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useRef, useState } from "react";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
-import bootstrap from "bootstrap";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
-import { useParams, useRouter } from "next/navigation";
+import { changeJsonData, getData, postData, postDataJson } from "api";
+import GDriveInput from "$component/dashboard/GDriveInput/GDriveInput";
+import { useParams } from "next/navigation";
 
 export default function ChangePage() {
-	const [title, setTitle] = useState("");
-	const [description, setDescription] = useState("");
-	const [file, setFile] = useState(null);
-	const [showAlert, setShowAlert] = useState(false);
+	const [categories, setCategories] = useState([]);
+	const [formData, setFormData] = useState({
+		title: '',
+		videoUrl: '',
+		details: '',
+		summary: '',
+		authors: [],
+		category: ''
+	});
+	const [lekala, setLekala] = useState([{ text: "", path: "" }]);
+	const [examples, setExamples] = useState([{ text: "", path: "" }]);
+
+	const authors = useRef();
+	const select = useRef();
+
+	const [element, setElement] = useState();
 
 	const params = useParams();
 	const { slug } = params
 
-	const handleSubmit = async (e, id) => {
+	useEffect(() => {
+		getData("categories", setCategories);
+		getData(`subcategories/${slug}`, setElement);
+	}, []);
+
+	useEffect(() => {
+		if (element != undefined) {
+			setFormData({
+				title: element.subcategory,
+				videoUrl: element.url,
+				details: element.details,
+				summary: element.summary,
+				authors: element.authors,
+				category: element.categoryname
+			})
+			setLekala(element.lekala)
+			setExamples(element.example)
+			authors.current.value = element.authors.join(", ")
+			select.current.value = element.categoryname
+		}
+	}, [element]);
+
+	useEffect(() => {
+		console.log(formData);
+	}, [formData]);
+
+	const [showAlert, setShowAlert] = useState(false);
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (!file) {
-			alert("Пожалуйста, выберите файл");
-			return;
-		}
+		const data = {
+			subcategory: formData.title,
+			details: formData.details,
+			summary: formData.summary,
+			url: formData.videoUrl,
+			authors: formData.authors.map((author) => author.trim()),
+			lekala: lekala,
+			example: examples,
+			categoryname: formData.category,
+		};
 
-		const formData = new FormData();
-		formData.append("title", title);
-		formData.append("description", description);
-		formData.append("path", file);
+		console.log(data);
 
-		try {
-			await axios.put(`http://localhost:3000/cards/${id}`, formData, {
-				headers: { "Content-Type": "multipart/form-data" },
-			});
-			setShowAlert(true);
-			setTimeout(() => setShowAlert(false), 3000);
-		} catch (error) {
-			console.error("Ошибка при отправке данных:", error);
-			alert("Ошибка при отправке данных.");
-		}
+		changeJsonData("subcategories", slug, data, setShowAlert)
 	};
 
 	return (
 		<main className="main">
 			{showAlert && (
 				<Alert
-					message="Картка була змінена!"
+					message="Майстер-клас успішно змінений!"
 					onClose={() => setShowAlert(false)}
 				/>
 			)}
-			<div className="main__form container-lg mt-5">
-				<h1 className="form-title admin-title mb-4">Додати статистичну картку</h1>
-				<form className="form needs-validation" onSubmit={(e) => handleSubmit(e, slug)}>
-					<div className="input-group mb-3">
-						<input
-							required
-							type="file"
-							className="form-control"
-							id="inputGroupFile02"
-							onChange={(e) => setFile(e.target.files[0])}
-							accept="image/*"
-						/>
-						<label className="input-group-text" htmlFor="inputGroupFile02">Зображення</label>
+			<div className="main__form container-lg mt-5 mb-5">
+				<h1 className="form-title admin-title mb-4">Додати майстре-клас</h1>
+				<form className="form needs-validation" onSubmit={handleSubmit}>
+					<div className="mb-3">
+						<label htmlFor="title" className="form-label">Заголовок</label>
+						<input onChange={(e) => setFormData({ ...formData, title: e.target.value })} value={formData.title} type="text" className="form-control" id="title" name="title" placeholder="Введіть заголовок" />
 					</div>
-					<div className="input-group mb-3">
-						<span className="input-group-text" id="inputGroup-sizing-default">Заголовок:</span>
-						<input
-							required
-							type="text"
-							className="form-control"
-							aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-default"
-							value={title}
-							onChange={(e) => setTitle(e.target.value)}
-						/>
+
+					<div className="mb-3">
+						<label className="form-label">Лекала</label>
+						<GDriveInput images={lekala} setImages={setLekala} />
 					</div>
-					<div className="input-group mb-3">
-						<span className="input-group-text" id="inputGroup-sizing-default">Значення:</span>
-						<input
-							required
-							type="text"
-							className="form-control"
-							aria-label="Sizing example input"
-							aria-describedby="inputGroup-sizing-default"
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-						/>
+
+					<div className="mb-3">
+						<label htmlFor="videoUrl" className="form-label">Посилання на відео(embed)</label>
+						<input onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })} value={formData.videoUrl} type="url" className="form-control" id="videoUrl" name="videoUrl" placeholder="Введіть посилання на відео" />
 					</div>
-					<button type="submit" className="btn btn-primary">Save</button>
+
+					<div className="mb-3">
+						<label className="form-label">Приклади готового виробу</label>
+						<GDriveInput images={examples} setImages={setExamples} />
+					</div>
+
+					<div className="input-group mb-3">
+						<span className="input-group-text">Деталі</span>
+						<textarea onChange={(e) => setFormData({ ...formData, details: e.target.value })} value={formData.details} style={{ resize: "none" }} className="form-control" aria-label="деталі"></textarea>
+					</div>
+
+					<div className="input-group mb-3">
+						<span className="input-group-text">Підсумок</span>
+						<textarea onChange={(e) => setFormData({ ...formData, summary: e.target.value })} value={formData.summary} style={{ resize: "none" }} className="form-control" aria-label="підсумок"></textarea>
+					</div>
+
+					<div className="mb-3">
+						<label htmlFor="title" className="form-label">Імена авторів через кому (,)</label>
+						<input ref={authors} onChange={e => setFormData({ ...formData, authors: e.target.value.split(",") })} type="text" className="form-control" id="title" name="title" placeholder="Введіть авторів" />
+					</div>
+
+					<div className="input-group mb-3">
+						<label className="input-group-text" htmlFor="inputGroupSelect01">Категорія</label>
+						<select ref={select} defaultValue="DEFAULT" onChange={e => setFormData({ ...formData, category: e.target.value })} className="form-select" id="inputGroupSelect01">
+							<option value="DEFAULT" disabled>Оберіть категорію...</option>
+							{categories.map(cat =>
+								<option key={cat.id} value={cat.id}>{cat.category}</option>
+							)}
+						</select>
+					</div>
+					<button onClick={(e) => handleSubmit(e)} type="submit" className="btn btn-primary">Save</button>
 				</form>
 			</div>
+			<Bootstrap />
 		</main>
 	);
 }

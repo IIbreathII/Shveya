@@ -4,7 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
-import bootstrap from "bootstrap";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
 import { postData } from "api";
 
@@ -16,7 +17,7 @@ export default function ChangePage() {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("categoryname", title);
+    formData.append("category", title);
 
     postData("categories", formData, setShowAlert)
   };
@@ -25,7 +26,7 @@ export default function ChangePage() {
     <main className="main">
       {showAlert && (
         <Alert
-          message="Картка була додана успішно!"
+          message="Категорія була додана успішно!"
           onClose={() => setShowAlert(false)}
         />
       )}
@@ -47,6 +48,7 @@ export default function ChangePage() {
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
+      <Bootstrap/>
     </main>
   );
 }

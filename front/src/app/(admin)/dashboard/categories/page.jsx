@@ -1,6 +1,7 @@
 'use client';
 
-import bootstrap from "bootstrap"
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import '$style/bootstrap.min.css'
 import "$style/admin/Admin.css"
 import Image from 'next/image';
@@ -8,14 +9,14 @@ import Link from "next/link";
 import DatabaseItem from "$component/dashboard/DatabaseItem/DatabaseItem";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import getCards, { deleteDataById } from "api";
+import { deleteDataById, getData } from 'api';
 
 export default function CardsPage() {
 	const [categories, setCategories] = useState([]);
 	const [selectedCardId, setSelectedCardId] = useState(null);
 
 	useEffect(() => {
-		getCards("categories", setCategories);
+		getData("categories", setCategories);
 	}, []);
 
 	return (
@@ -46,10 +47,11 @@ export default function CardsPage() {
 				</div>
 				<div className="list-group">
 					{categories.map((categorie, index) => (
-						<DatabaseItem setSelectedId={setSelectedCardId} key={categorie.id} title={`Категорія ${index + 1} (${categorie.categoryname})`} link={`/dashboard/cards/add/${categorie.id}`} id={categorie.id}/>
+						<DatabaseItem setSelectedId={setSelectedCardId} key={categorie.id} title={`Категорія ${index + 1} (${categorie.category})`} link={`/dashboard/categories/add/${categorie.id}`} id={categorie.id}/>
 					))}
 				</div>
 			</div>
+			<Bootstrap/>
 		</main>
 	);
 }

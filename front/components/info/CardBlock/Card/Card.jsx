@@ -29,25 +29,16 @@ const Card = forwardRef(({ title, number, img }, ref) => {
 			variants={blockAnitmation}
 		>
 			<div className="card__top">
-				<div className="iconshveya">
-					<Image
-						src="/images/short1.png"
-						alt="logo"
-						width={356}
-						height={61}
-						className="logo-img"
-						priority
-					/>
-				</div>
+				<p className="card__number">{number}</p>
 			</div>
 			<div className="card__bottom">
 				<h1 className="card__title">{title}</h1>
-				<p>{number}</p>
 			</div>
 		</motion.div>
 	);
 });
 
+Card.displayName = 'Card';
 export default Card;
 
 export const MCard = motion(Card)

@@ -1,62 +1,72 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
-import bootstrap from "bootstrap";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
-import getData, { postData } from "api";
 import PhotoInput from "$component/dashboard/ImageInput/ImageInput";
-import AuthorInput from "$component/dashboard/AuthorsInput/AuthorsInpu";
+import { getData, postData, postDataJson } from "api";
+import GDriveInput from "$component/dashboard/GDriveInput/GDriveInput";
 
 export default function ChangePage() {
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     title: '',
+    title_en: '',
     videoUrl: '',
     details: '',
+    details_en: '',
     summary: '',
+    summary_en: '',
     authors: [],
-    category: ''
+    authors_en: [],
+    category: '',
+    category_en: '',
   });
-  const [lekala, setLekala] = useState([]);
-  const [examples, setExamples] = useState([]);
+  const [lekala, setLekala] = useState([{ text: "", text_en: "", path: "" }]);
+  const [examples, setExamples] = useState([{ text: "", text_en: "", path: "" }]);
 
   useEffect(() => {
     getData("categories", setCategories);
   }, []);
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("subcategory_name", formData.title);
-    data.append("title", formData.title);
-    data.append("videoUrl", formData.videoUrl);
-    data.append("details", formData.details);
-    data.append("summary", formData.summary);
-    data.append("authors", JSON.stringify(formData.authors));
-    data.append("category", formData.category);
+    const data = {
+      subcategory: formData.title,
+      subcategory_en: formData.title_en,
+      details: formData.details,
+      details_en: formData.details_en,
+      summary: formData.summary,
+      summary_en: formData.summary_en,
+      url: formData.videoUrl,
+      authors: formData.authors.map((author) => author.trim()),
+      authors_en: formData.authors_en.map((author) => author.trim()),
+      lekala: lekala,
+      example: examples,
+      categoryname: formData.category,
+      categoryname_en: formData.category,
+    };
 
-    lekala.forEach((elem) => {
-      data.append("lekala", elem.file);
-    });
+    console.log(data);
 
-    examples.forEach((elem) => {
-      data.append("example", elem.file);
-    });
-
-    postData("categories/" + formData.category + "/subcategories", data, setShowAlert)
+    postDataJson("subcategories/category/" + formData.category, data, setShowAlert)
   };
 
   return (
     <main className="main">
       {showAlert && (
         <Alert
-          message="Картка була додана успішно!"
+          message="Майстер-клас був доданий успішно!"
           onClose={() => setShowAlert(false)}
         />
       )}
@@ -69,8 +79,13 @@ export default function ChangePage() {
           </div>
 
           <div className="mb-3">
+            <label htmlFor="title" className="form-label">Заголовок (англ)</label>
+            <input onChange={(e) => setFormData({ ...formData, title_en: e.target.value })} value={formData.title_en} type="text" className="form-control" id="title" name="title" placeholder="Введіть заголовок" />
+          </div>
+
+          <div className="mb-3">
             <label className="form-label">Лекала</label>
-            <PhotoInput photos={lekala} setPhotos={setLekala} />
+            <GDriveInput images={lekala} setImages={setLekala} />
           </div>
 
           <div className="mb-3">
@@ -80,7 +95,7 @@ export default function ChangePage() {
 
           <div className="mb-3">
             <label className="form-label">Приклади готового виробу</label>
-            <PhotoInput photos={examples} setPhotos={setExamples} />
+            <GDriveInput images={examples} setImages={setExamples} />
           </div>
 
           <div className="input-group mb-3">
@@ -89,8 +104,18 @@ export default function ChangePage() {
           </div>
 
           <div className="input-group mb-3">
+            <span className="input-group-text">Деталі (англ)</span>
+            <textarea onChange={(e) => setFormData({ ...formData, details_en: e.target.value })} value={formData.details_en} style={{ resize: "none" }} className="form-control" aria-label="деталі"></textarea>
+          </div>
+
+          <div className="input-group mb-3">
             <span className="input-group-text">Підсумок</span>
             <textarea onChange={(e) => setFormData({ ...formData, summary: e.target.value })} value={formData.summary} style={{ resize: "none" }} className="form-control" aria-label="підсумок"></textarea>
+          </div>
+
+          <div className="input-group mb-3">
+            <span className="input-group-text">Підсумок (англ)</span>
+            <textarea onChange={(e) => setFormData({ ...formData, summary_en: e.target.value })} value={formData.summary_en} style={{ resize: "none" }} className="form-control" aria-label="підсумок"></textarea>
           </div>
 
           <div className="mb-3">
@@ -98,18 +123,24 @@ export default function ChangePage() {
             <input onChange={e => setFormData({ ...formData, authors: e.target.value.split(",") })} type="text" className="form-control" id="title" name="title" placeholder="Введіть авторів" />
           </div>
 
+          <div className="mb-3">
+            <label htmlFor="title" className="form-label">Імена авторів (англ)</label>
+            <input onChange={e => setFormData({ ...formData, authors_en: e.target.value.split(",") })} type="text" className="form-control" id="title" name="title" placeholder="Введіть авторів" />
+          </div>
+
           <div className="input-group mb-3">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Категорія</label>
             <select defaultValue="DEFAULT" onChange={e => setFormData({ ...formData, category: e.target.value })} className="form-select" id="inputGroupSelect01">
               <option value="DEFAULT" disabled>Оберіть категорію...</option>
               {categories.map(cat =>
-                <option key={cat.id} value={cat.id}>{cat.categoryname}</option>
+                <option key={cat.id} value={cat.id}>{cat.category}</option>
               )}
             </select>
           </div>
           <button onClick={(e) => handleSubmit(e)} type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
+      <Bootstrap />
     </main>
   );
 }

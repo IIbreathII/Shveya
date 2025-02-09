@@ -4,7 +4,9 @@ const AuthorSect = ({ masterClassData }) => {
   return (
     <section className="author">
       <h2>Автори лекал:</h2>
-      {masterClassData.authors[0]}
+      {masterClassData.authors.map((e, index) => 
+        <div key={index}>{e}</div>
+      )}
     </section>
   );
 };

@@ -1,3 +1,17 @@
 .master-class {
 	margin: 0px 0px 50px 0px;
 }
+
+.lekala-link {
+	font-size: 18px;
+	color: #4682B4;
+}
+
+.invalid-link {
+	font-family: 'intro', serif;
+	color: #d46f1d;
+	font-size: 15px;
+	font-style: italic;
+	font-weight: 500;
+	position: relative;
+}

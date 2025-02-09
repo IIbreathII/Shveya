@@ -1,6 +1,5 @@
 'use client';
 
-import bootstrap from "bootstrap"
 import '$style/bootstrap.min.css'
 import "$style/admin/Admin.css"
 import Image from 'next/image';
@@ -8,7 +7,9 @@ import Link from "next/link";
 import DatabaseItem from "$component/dashboard/DatabaseItem/DatabaseItem";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import getData, { deleteDataById } from "api";
+import { deleteDataById, getData } from "api";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 
 export default function CardsPage() {
 	const [slides, setSlides] = useState([]);
@@ -46,10 +47,11 @@ export default function CardsPage() {
 				</div>
 				<div className="list-group">
 					{slides.map((slide) => (
-						<DatabaseItem setSelectedId={setSelectedMarkerId} key={slide.id} title={`Слайд ${slide.id} (${slide.title})`} link={`/dashboard/slides/add/${slide.id}`} id={slide.id}/>
+						<DatabaseItem setSelectedId={setSelectedMarkerId} key={slide.id} title={`Слайд ${slide.id} (${slide.title})`} link={`/dashboard/slides/add/${slide.id}`} id={slide.id} />
 					))}
 				</div>
 			</div>
+			<Bootstrap/>
 		</main>
 	);
 }

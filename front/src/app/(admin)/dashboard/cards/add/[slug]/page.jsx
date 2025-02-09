@@ -4,42 +4,53 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
-import bootstrap from "bootstrap";
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
-import { useParams, useRouter } from "next/navigation";
+import { changeData, getData, postData } from "api";
+import { useParams } from "next/navigation";
 
 export default function ChangePage() {
 	const [title, setTitle] = useState("");
+	const [title_en, setTitleEn] = useState("");
 	const [description, setDescription] = useState("");
 	const [file, setFile] = useState(null);
 	const [showAlert, setShowAlert] = useState(false);
 
+	const [element, setElement] = useState();
+
 	const params = useParams();
 	const { slug } = params
+
+	useEffect(() => {
+		getData(`cards/${slug}`, setElement);
+	}, []);
+
+	useEffect(() => {
+		if (element != undefined) {
+			setTitle(element.title)
+			setDescription(element.description)
+			setFile(element.path)
+			setTitleEn(element.title_en)
+		}
+	}, [element]);
 
 	const handleSubmit = async (e, id) => {
 		e.preventDefault();
 
 		if (!file) {
-			alert("Пожалуйста, выберите файл");
+			alert("Будь ласка, вставте посилання");
 			return;
 		}
 
 		const formData = new FormData();
 		formData.append("title", title);
+		formData.append("title_en", title_en);
 		formData.append("description", description);
+		formData.append("description_en", description);
 		formData.append("path", file);
 
-		try {
-			await axios.put(`http://localhost:3000/cards/${id}`, formData, {
-				headers: { "Content-Type": "multipart/form-data" },
-			});
-			setShowAlert(true);
-			setTimeout(() => setShowAlert(false), 3000);
-		} catch (error) {
-			console.error("Ошибка при отправке данных:", error);
-			alert("Ошибка при отправке данных.");
-		}
+		changeData("cards", id, formData, setShowAlert)
 	};
 
 	return (
@@ -51,7 +62,7 @@ export default function ChangePage() {
 				/>
 			)}
 			<div className="main__form container-lg mt-5">
-				<h1 className="form-title admin-title mb-4">Додати статистичну картку</h1>
+				<h1 className="form-title admin-title mb-4">Змінити картку</h1>
 				<form className="form needs-validation" onSubmit={(e) => handleSubmit(e, slug)}>
 					<div className="input-group mb-3">
 						<input
@@ -88,9 +99,22 @@ export default function ChangePage() {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
+					<div className="input-group mb-3">
+						<span className="input-group-text" id="inputGroup-sizing-default">Заголовок (англ):</span>
+						<input
+							required
+							type="text"
+							className="form-control"
+							aria-label="Sizing example input"
+							aria-describedby="inputGroup-sizing-default"
+							value={title_en}
+							onChange={(e) => setTitleEn(e.target.value)}
+						/>
+					</div>
 					<button type="submit" className="btn btn-primary">Save</button>
 				</form>
 			</div>
+			<Bootstrap />
 		</main>
 	);
 }

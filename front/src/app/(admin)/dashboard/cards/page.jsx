@@ -1,21 +1,20 @@
 'use client';
 
-import bootstrap from "bootstrap"
+import dynamic from 'next/dynamic';
+const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import '$style/bootstrap.min.css'
 import "$style/admin/Admin.css"
-import Image from 'next/image';
 import Link from "next/link";
 import DatabaseItem from "$component/dashboard/DatabaseItem/DatabaseItem";
-import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import getCards, { deleteDataById } from "api";
+import { deleteDataById, getData } from "api";
 
 export default function CardsPage() {
 	const [cards, setCards] = useState([]);
 	const [selectedCardId, setSelectedCardId] = useState(null);
 
 	useEffect(() => {
-		getCards("cards", setCards);
+		getData("cards", setCards);
 	}, []);
 
 	return (
@@ -46,10 +45,11 @@ export default function CardsPage() {
 				</div>
 				<div className="list-group">
 					{cards.map((card) => (
-						<DatabaseItem setSelectedId={setSelectedCardId} key={card.id} title={`Картка ${card.id} (${card.title})`} link={`/dashboard/cards/add/${card.id}`} id={card.id}/>
+						<DatabaseItem setSelectedId={setSelectedCardId} key={card.id} title={`Картка ${card.id} (${card.title})`} link={`/dashboard/cards/add/${card.id}`} id={card.id} />
 					))}
 				</div>
 			</div>
+			<Bootstrap />
 		</main>
 	);
 }
