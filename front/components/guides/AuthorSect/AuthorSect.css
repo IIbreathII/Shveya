@@ -1,3 +1,64 @@
 .author {
 	margin: 0px 0px 40px 0px;
-}
+	/* Убираем центрирование всего содержимого */
+  }
+  
+  .author__container {
+	background-color: #E8DCD0; /* Фон контейнера */
+	padding: 25px 20px 20px; /* Увеличил верхний паддинг, чтобы заголовок влез */
+	border-radius: 2px;
+	box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.63);
+	border: 1px solid rgb(117, 117, 117);
+	max-width: 1200px; /* Устанавливаем максимальную ширину контейнера */
+	margin-left: 0; /* Отменяем автоцентрирование */
+	margin-top: 30px;
+	position: relative;
+  }
+  
+  .author h2 {
+	font-size: 26px;
+	background-color: #2e2e35;
+	color: #E8DCD0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 500px; /* Устанавливаем ширину заголовка */
+	height: 60px;
+	border-radius: 5px;
+	margin: 0 0 20px; /* Центрируем только по вертикали */
+	padding: 0 20px;
+  }
+  
+  .author__list {
+	background-color: #E8DCD0; /* Вернули фон контейнера */
+	color: #2e2e35;
+	padding: 15px 20px;
+	border-radius: 5px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	font-size: 32px;
+	font-weight: 1200px;
+	display: inline-block;
+	max-width: 100%; /* Убираем максимальную ширину для списка */
+	margin: 0 auto;
+  }
+  
+  .author__list div {
+	padding: 10px 15px;
+	white-space: nowrap;
+	display: inline-block;
+  }
+  
+  @media (max-width: 2200px) {
+	.author__container {
+	  max-width: 100%; /* Максимальная ширина теперь будет 100% */
+	  padding: 30px 15px 15px;
+	}
+	.author h2 {
+	  width: 100%;
+	}
+	.author__list {
+	  display: block;
+	  text-align: left; /* Убираем центрирование на маленьких экранах */
+	}
+  }
+  

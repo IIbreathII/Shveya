@@ -7,22 +7,23 @@ const ExamplesSect = ({ masterClassData }) => {
 
   return (
     <section className="examples">
-      <h2>Приклади готового одягу</h2>
-
-      <div className="gallery">
-        {masterClassData.example.map((exampl, index) => (
-          <Image
-            key={index}
-            src={`http://drive.google.com/uc?export=view&id=${exampl.path}`}
-            alt={exampl.text}
-            width={356}
-            height={61}
-            onError={(e) => {
-              setError(true)
-              e.target.classList.add("image-notfound")
-            }}
-          />
-        ))}
+      <div className="examples__container">
+        <h2>Приклади готового одягу</h2>
+        <div className="gallery">
+          {masterClassData.example.map((exampl, index) => (
+            <Image
+              key={index}
+              src={`http://drive.google.com/uc?export=view&id=${exampl.path}`}
+              alt={exampl.text}
+              width={356}
+              height={61}
+              onError={(e) => {
+                setError(true);
+                e.target.classList.add("image-notfound");
+              }}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

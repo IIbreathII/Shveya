@@ -33,34 +33,44 @@ const MasterClassSect = ({ masterClassData }) => {
 
   return (
     <section className="master-class">
-      <h1 style={{ marginBottom: "20px", fontSize: "26px", textAlign: "center" }}>
-        {masterClassData.subcategory}
-      </h1>
-      <h2>Лекала:</h2>
-      {loaded
-        ?
-        <ul>
-          {masterClassData.lekala.map((lekalo, index) => {
-            const url = `https://drive.google.com/file/d/${lekalo.path}/view?usp=sharing`;
-            const isInvalid = invalidLinks[lekalo.path];
+      <div className="masterclass-title-container">
+        <h1 className="masterclass-title">
+          {masterClassData.subcategory}
+        </h1>
+      </div>
+      
+      <div className="masterclass-subcategory-container">
+        <h2>Лекала</h2>
 
-            return (
-              <li key={index}>
-                {lekalo.text} -{" "}
-                <Link
-                  className={isInvalid ? "lekala-link invalid-link" : "lekala-link"}
-                  href={url}
-                  target="_blank"
-                >
-                  {isInvalid ? "<Файл не доступний>" : "завантажити"}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-        : <div>Завантаження...</div>
-      }
+        {loaded ? (
+          <ul>
+            {masterClassData.lekala.map((lekalo, index) => {
+              const url = `https://drive.google.com/file/d/${lekalo.path}/view?usp=sharing`;
+              const isInvalid = invalidLinks[lekalo.path];
+
+              return (
+                <li key={index}>
+                  {lekalo.text} -{" "}
+                  <Link
+                    className={isInvalid ? "lekala-link invalid-link" : "lekala-link"}
+                    href={url}
+                    target="_blank"
+                  >
+                    {isInvalid ? "<Файл не доступний>" : "завантажити"}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div>Завантаження...</div>
+        )}
+      </div>
+
+
+
     </section>
+
   );
 };
 
