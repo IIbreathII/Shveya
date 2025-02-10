@@ -5,7 +5,7 @@
       "$component/*": ["./components/*"],
       "$style/*": ["./style/*"],
       "$fonts/*": ["./fonts/*"],
-      "$images/*": ["./images/*"],
+      "$images/*": ["./public/*"],
       "$hooks/*": ["./hooks/*"],
     }
   }
