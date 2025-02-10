@@ -1,4 +1,4 @@
-.aside { 
+.aside {
 	background-color: #2e2e35;
 	padding: 17px;
 	width: 255px;
@@ -11,60 +11,22 @@
 	top: 0;
 	left: 0;
 	transition: transform 0.3s ease;
+	z-index: 3;
 }
 
+/* Скрытие боковой панели */
 .aside.closed {
 	transform: translateX(-100%);
 }
 
+/* Основной контент */
 .main-content {
+	transition: margin-left 0.3s ease;
+}
+
+/* Когда aside открыт — отступ */
+body.expanded .main-content {
 	margin-left: 275px;
-}
-
-@media (max-width: 900px) {
-	.aside {
-		width: 100%;
-		position: static;
-		min-height: auto;
-		margin-bottom: 17px;
-		padding: 13px;
-		border-radius: 0;
-	}
-
-	.main-content {
-		margin-left: 0;
-	}
-}
-
-.spoller__link {
-	position: relative;
-	padding-left: 17px;
-	display: flex;
-	align-items: center;
-	text-decoration: none;
-	color: black;
-	font-size: 14px;
-	min-height: 20px;
-}
-
-/* Индикатор напротив ссылки */
-.spoller__link::after {
-    content: "";
-    position: absolute;
-    left: 1px;
-    width: 10px;
-    height: 10px;
-    background-color: transparent;
-    border-radius: 50%;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Индикатор отображается у активной ссылки */
-.spoller__link.active::after,
-.spoller__link:hover::after {
-    background-color: red;
 }
 
 /* Кнопка скрытия/открытия панели */
@@ -105,14 +67,8 @@
 	background-color: #25252a;
 }
 
-.aside.closed .toggle-button {
-	right: -38px;
-}
-
 /* Стили для активной категории */
 .spoller-active {
-    font-weight: bold;
-    color: red;
+	font-weight: bold;
+	color: red;
 }
-
-

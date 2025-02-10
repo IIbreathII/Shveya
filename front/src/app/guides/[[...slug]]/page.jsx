@@ -40,29 +40,27 @@ export default function MasterClassPage() {
   }, [categories, slug]);
 
   return (
-      
-      <div className="wrapper">
-      <Questions />
-      <Aside categories={categories} />
-        <div className="container">
-          
-          <main className="main-content">
-            {guidesData.authors ? (
-              <>
-                <MasterClassSect masterClassData={guidesData} />
-                <VideoSect masterClassData={guidesData} />
-                <ExamplesSect masterClassData={guidesData} />
-                <DetailsSect masterClassData={guidesData} />
-                <AuthorSect masterClassData={guidesData} />
-              </>
-            ) : (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            )}
-          </main>
-        </div>
+    <div className="wrapper">
+      <Aside categories={categories} className="aside" />
+      <div className="container">
+        <Questions />
+        <main className="main-content">
+          {guidesData.authors ? (
+            <>
+              <MasterClassSect masterClassData={guidesData} />
+              <VideoSect masterClassData={guidesData} />
+              <ExamplesSect masterClassData={guidesData} />
+              <DetailsSect masterClassData={guidesData} />
+              <AuthorSect masterClassData={guidesData} />
+            </>
+          ) : (
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          )}
+        </main>
       </div>
-
+    </div>
   );
+  
 }

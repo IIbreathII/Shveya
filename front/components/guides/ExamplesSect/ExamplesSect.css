@@ -25,8 +25,8 @@
     display: flex;
     justify-content: center; /* Центрируем по горизонтали */
     align-items: center; /* Центрируем по вертикали */
-    width: 600px; /* Ширина остается неизменной */
-    height: 60px;
+    width: auto; /* Ширина остается неизменной */
+    height: auto;
     border-radius: 5px;
     margin: 0 auto 20px auto; /* Центрируем блок и задаем отступ снизу */
   }

@@ -182,6 +182,20 @@
 .btn-active::before {
 	top: 50%;
 	transform: translate(0, -50%) rotate(45deg);
+
+}
+
+.extra-button {
+	display: none; /* По умолчанию скрыта */
+	width: 40px;
+	height: 40px;
+	background-image: url('/front/public/images/pointer.png'); /* Путь к картинке */
+	background-size: contain; /* Подгоняем картинку под размер кнопки */
+	background-repeat: no-repeat;
+	background-position: center;
+	border: none;
+	cursor: pointer;
+	padding: 0;
 }
 
 @media (max-width: 992px) {
@@ -199,7 +213,7 @@
 
 
 
-@media (max-width: 748px) {
+@media (max-width: 950px) {
 	.icon-menu {
 		display: block;
 	}
@@ -226,6 +240,16 @@
 	.right .menulang  {
 		margin: 0;
 	}
+
+	body.guides-page .extra-button {
+		display: flex;
+		position: absolute;
+		left: 10px;
+		top: 50%;
+		transform: translateY(-50%);
+}
+
+	
 }
 
 .active {
