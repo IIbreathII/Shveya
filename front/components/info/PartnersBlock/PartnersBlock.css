@@ -2,7 +2,7 @@
 	background: #ebddd0;
 	position: relative;
 	z-index: 2;
-	border-bottom: 12px solid #404046;
+	border-bottom: 12px solid #2e2e35;
 }
 
 .partners__wrapper {
@@ -25,7 +25,7 @@
 	color: #ebddd0;
 	padding: 20px 0px 0px 0px;
 	background-color: #2e2e35;
-	border-top: 12px solid #404046;
+	border-top: 12px solid #2e2e35;
 }
 
 .partners__slide {

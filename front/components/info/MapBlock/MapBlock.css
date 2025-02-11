@@ -1,7 +1,7 @@
 .map {
 	position: relative;
 	z-index: 2;
-	border-top: 12px solid #404046;
+	border-top: 12px solid #2e2e35;
 }
 
 .map__container {

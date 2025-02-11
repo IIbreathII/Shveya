@@ -18,6 +18,7 @@
   }
   
   .examples h2 {
+    padding: 15px 20px;
     font-size: 26px;
     text-align: center; /* Центрируем текст внутри */
     background-color: #2e2e35;
