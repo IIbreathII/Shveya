@@ -1,5 +1,5 @@
 /* Главный контейнер, центрирующий содержимое */
-.wrapper {
+.wrapper-guides {
     display: flex;
     justify-content: center; /* Центрирует контент по горизонтали */
     width: 100%;
@@ -36,7 +36,7 @@
 
 /* Адаптация для экрана 950px и меньше */
 @media (max-width: 950px) {
-    .wrapper {
+    .wrapper-guides {
         display: flex;
         justify-content: center;
         align-items: center;

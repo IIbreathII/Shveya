@@ -40,7 +40,7 @@ export default function MasterClassPage() {
   }, [categories, slug]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper-guides">
       <Aside categories={categories} className="aside" />
       <div className="container">
         <Questions />
