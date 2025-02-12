@@ -72,7 +72,7 @@
 }
 
 .menulang button:hover {
-	color: #e5a462;
+	color: rgb(82, 223, 129);
 }
 
 ._line {
@@ -100,7 +100,7 @@
 }
 
 .menu .menu__link:hover {
-	color: #e5a462;
+	color: rgb(82, 223, 129);
 }
 
 .menu__link {
@@ -111,7 +111,7 @@
 	content: '';
 	width: 12px;
 	height: 12px;
-	background-color: #e5a462;
+	background-color: rgb(82, 223, 129);
 	border-radius: 50%;
 	position: absolute;
 	bottom: -20px;
@@ -257,5 +257,5 @@
 }
 
 .link-active {
-	color: #e5a462 !important;
+	color: rgb(82, 223, 129) !important;
 }

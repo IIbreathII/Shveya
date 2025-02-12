@@ -1,3 +1,4 @@
+/* Основные стили */
 .aside {
 	background-color: #2e2e35;
 	padding: 17px;
@@ -14,17 +15,14 @@
 	z-index: 3;
 }
 
-/* Скрытие боковой панели */
 .aside.closed {
 	transform: translateX(-100%);
 }
 
-/* Основной контент */
 .main-content {
 	transition: margin-left 0.3s ease;
 }
 
-/* Когда aside открыт — отступ */
 body.expanded .main-content {
 	margin-left: 275px;
 }
@@ -65,10 +63,4 @@ body.expanded .main-content {
 
 .toggle-button:hover {
 	background-color: #25252a;
-}
-
-/* Стили для активной категории */
-.spoller-active {
-	font-weight: bold;
-	color: red;
 }

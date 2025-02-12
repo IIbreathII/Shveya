@@ -75,8 +75,8 @@ const Header = () => {
 
 				<div className="right _menu">
 					<nav className="menu">
-						<Link onClick={closeMenu} className={location == "/" || location == "/en" ? 'menu__link link-active' : 'menu__link'} href={currentLang == "ua" ? "/" : "/en"}>{currentLang == "ua" ? "Головна сторінка" : "Home page"}</Link>
 						<Link onClick={closeMenu} className={location.includes("guides") ? 'menu__link link-active' : 'menu__link'} href={currentLang == "ua" ? "/guides" : "/en/guides"}>{currentLang == "ua" ? "Навчальний центр" : "Training center"}</Link>
+						<Link onClick={closeMenu} className={location == "/" || location == "/en" ? 'menu__link link-active' : 'menu__link'} href={currentLang == "ua" ? "/" : "/en"}>{currentLang == "ua" ? "Головна сторінка" : "Home page"}</Link>
 						<Link onClick={closeMenu} className={location.includes('/about') ? 'menu__link link-active' : 'menu__link'} href={currentLang == "ua" ? "/about" : "/en/about"}>{currentLang == "ua" ? "Про нас" : "About us"}</Link>
 					</nav>
 					<div className="menulang">

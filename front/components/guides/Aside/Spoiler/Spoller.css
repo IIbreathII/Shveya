@@ -64,3 +64,6 @@
 	padding-right: 30px;
 }
 
+.spoller__link.active {
+	color: #00ff66 !important; /* Принудительно задаем цвет */
+}
