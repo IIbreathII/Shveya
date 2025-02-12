@@ -1,12 +1,3 @@
-.spoller__title {
-    cursor: pointer;
-    font-size: 20px;
-    color: #e8dcd0;
-    font-family: 'intro', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .spoller__button {
 	display: flex;
@@ -66,4 +57,13 @@
 
 .spoller__link.active {
 	color: #00ff66 !important; /* Принудительно задаем цвет */
+}
+
+.spoller__title.active-category {
+  color:  #00ff66; /* Подсветка активной категории зелёным цветом */
+  font-weight: bold;
+}
+
+.spoller-active .spoller__body {
+  height: auto; /* Открытие активной категории */
 }

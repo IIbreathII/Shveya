@@ -9,23 +9,52 @@ import Link from "next/link";
 const Aside = ({ categories }) => {
   const pathname = usePathname();
   const pathSegments = pathname.split("/");
-  const urlId = pathSegments[pathSegments.length - 1]; // Получаем id из URL
+  const urlId = pathSegments[pathSegments.length - 1];
+
   const [activeLink, setActiveLink] = useState(null);
+  const [openCategories, setOpenCategories] = useState(new Set());
   const [isOpen, setIsOpen] = useState(true);
   const [isNonActiveHovered, setIsNonActiveHovered] = useState(false);
 
   useEffect(() => {
+    let newActiveLink = null;
     if (urlId && !isNaN(urlId)) {
-      setActiveLink(urlId);
-    } else if (!activeLink && categories.length > 0) {
+      newActiveLink = urlId;
+    } else if (categories.length > 0) {
       for (const category of categories) {
         if (category.subcategories.length > 0) {
-          setActiveLink(category.subcategories[0].id);
+          newActiveLink = category.subcategories[0].id;
           break;
         }
       }
     }
+    setActiveLink(newActiveLink);
   }, [urlId, categories]);
+
+  useEffect(() => {
+    if (activeLink) {
+      let newOpenCategories = new Set();
+      for (const category of categories) {
+        if (category.subcategories.some((sub) => sub.id == activeLink)) {
+          newOpenCategories.add(category.id);
+          break;
+        }
+      }
+      setOpenCategories(newOpenCategories);
+    }
+  }, [activeLink, categories]);
+
+  const toggleCategory = (categoryId) => {
+    setOpenCategories((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId);
+      } else {
+        newSet.add(categoryId);
+      }
+      return newSet;
+    });
+  };
 
   return (
     <aside
@@ -37,43 +66,41 @@ const Aside = ({ categories }) => {
         <div className={`toggle-icon ${isOpen ? "rotated" : ""}`}></div>
       </button>
 
-      {categories.map(
-        (category, index) =>
-          category.subcategories.length > 0 && (
-            <Spoller
-              key={category.id}
-              disabled={index === 0 ? "spoller-active" : ""}
-              title={category.category}
-              activeLink={activeLink}
-              setActiveLink={setActiveLink}
-            >
-              {category.subcategories.map((sub) => (
-                <Link
-                  key={sub.id}
-                  href={`/guides/${sub.subcategory.toLowerCase()}/${sub.id}`}
-                  className={`spoller__link ${
-                    activeLink == sub.id ? "active" : ""
-                  }`}
-                  onClick={() => setActiveLink(sub.id)}
-                  /* Если ссылка не активная – отслеживаем наведение */
-                  onMouseEnter={() => {
-                    if (activeLink !== sub.id) {
-                      setIsNonActiveHovered(true);
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    if (activeLink !== sub.id) {
-                      setIsNonActiveHovered(false);
-                    }
-                  }}
-                >
-                  {sub.subcategory}
-                  {activeLink == sub.id && <span className="indicator"></span>}
-                </Link>
-              ))}
-            </Spoller>
-          )
-      )}
+      {categories.map((category) => {
+        const isActiveCategory = category.subcategories.some(
+          (sub) => sub.id == activeLink
+        );
+
+        return category.subcategories.length > 0 ? (
+          <Spoller
+            key={category.id}
+            title={category.category}
+            isActiveCategory={isActiveCategory}
+          >
+            {category.subcategories.map((sub) => (
+              <Link
+                key={sub.id}
+                href={`/guides/${sub.subcategory.toLowerCase()}/${sub.id}`}
+                className={`spoller__link ${activeLink == sub.id ? "active" : ""}`}
+                onClick={() => setActiveLink(sub.id)}
+                onMouseEnter={() => {
+                  if (activeLink !== sub.id) {
+                    setIsNonActiveHovered(true);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (activeLink !== sub.id) {
+                    setIsNonActiveHovered(false);
+                  }
+                }}
+              >
+                {sub.subcategory}
+                {activeLink == sub.id && <span className="indicator"></span>}
+              </Link>
+            ))}
+          </Spoller>
+        ) : null;
+      })}
     </aside>
   );
 };
