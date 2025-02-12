@@ -1,66 +1,52 @@
 /* Основные стили */
 .aside {
-	background-color: #2e2e35;
-	padding: 17px;
-	width: 255px;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	gap: 17px;
-	padding-top: 102px;
-	position: fixed;
-	top: 0;
-	left: 0;
-	transition: transform 0.3s ease;
-	z-index: 3;
+  background-color: #2e2e35;
+  width: 300px;
+  align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  padding-top: 102px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+  z-index: 3;
+  
 }
 
+/* Контейнер с прокруткой */
+.aside-content {
+  padding-top: 5%;
+  padding-left: 5%;
+  max-height: calc(100vh - 140px);
+  width: calc(100% - 12px); /* Уменьшаем ширину, чтобы оставить место для скролла */
+  overflow-y: auto;
+  position: relative;
+  scrollbar-gutter: stable both-edges; /* Создаём отступы, если поддерживается браузером */
+}
+
+/* Стилизация скроллбара */
+.aside-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.aside-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.aside-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Скрытие aside при закрытии */
 .aside.closed {
-	transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
-.main-content {
-	transition: margin-left 0.3s ease;
-}
-
+/* Сдвиг контента при раскрытии */
 body.expanded .main-content {
-	margin-left: 275px;
-}
-
-/* Кнопка скрытия/открытия панели */
-.toggle-button {
-	position: absolute;
-	top: 50%;
-	right: -38px;
-	transform: translateY(-50%);
-	background-color: #2e2e35;
-	border: none;
-	width: 38px;
-	height: 64px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	border-radius: 0 10px 10px 0;
-	transition: right 0.3s ease, background-color 0.3s ease;
-}
-
-/* Иконка кнопки */
-.toggle-icon {
-	width: 42%;
-	height: 42%;
-	background-image: url("/images/pointer.png");
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
-	transition: transform 0.3s ease;
-}
-
-/* Поворот иконки */
-.toggle-icon.rotated {
-	transform: rotate(180deg);
-}
-
-.toggle-button:hover {
-	background-color: #25252a;
+  margin-left: 275px;
 }
