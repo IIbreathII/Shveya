@@ -29,7 +29,7 @@ export default function CardsPage() {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							Картка буде повністю видалена!
+							Маркер буде повністю видалений!
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Відмінити</button>

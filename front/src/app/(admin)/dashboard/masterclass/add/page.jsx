@@ -25,8 +25,8 @@ export default function ChangePage() {
     category: '',
     category_en: '',
   });
-  const [lekala, setLekala] = useState([{ text: "", text_en: "", path: "" }]);
-  const [examples, setExamples] = useState([{ text: "", text_en: "", path: "" }]);
+  const [lekala, setLekala] = useState([{ path: "", text: "", text_en: "" }]);
+  const [examples, setExamples] = useState([{ path: "", text: "", text_en: "" }]);
 
   useEffect(() => {
     getData("categories", setCategories);
@@ -40,6 +40,18 @@ export default function ChangePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "title", "title_en", "videoUrl", "details", "details_en",
+      "summary", "summary_en", "category"
+    ];
+
+    const emptyFields = requiredFields.filter(field => !formData[field].trim());
+
+    if (emptyFields.length > 0) {
+      alert('Будь ласка, заповніть всі поля!');
+      return;
+    }
 
     const data = {
       subcategory: formData.title,

@@ -29,7 +29,7 @@ export default function CardsPage() {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							Картка буде повністю видалена!
+							Партнер буде повністю видалений!
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Відмінити</button>
@@ -46,8 +46,8 @@ export default function CardsPage() {
 					</Link>
 				</div>
 				<div className="list-group">
-					{partners.map((partner) => (
-						<DatabaseItem setSelectedId={setSelectedPartnerId} key={partner.id} title={`Партнер ${partner.id}`} link={`/dashboard/markers/add/${partner.id}`} id={partner.id}/>
+					{partners.map((partner, index) => (
+						<DatabaseItem setSelectedId={setSelectedPartnerId} key={partner.id} title={`Партнер ${index + 1}`} link={`/dashboard/partners/add/${partner.id}`} id={partner.id}/>
 					))}
 				</div>
 			</div>

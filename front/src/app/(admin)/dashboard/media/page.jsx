@@ -27,7 +27,7 @@ export default function CardsPage() {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							Картка буде повністю видалена!
+							Посилання буде повністю видалене!
 						</div>
 						<div className="modal-footer">
 							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Відмінити</button>
@@ -45,7 +45,7 @@ export default function CardsPage() {
 				</div>
 				<div className="list-group">
 					{media.map((elem) => (
-						<DatabaseItem setSelectedId={setSelectedMarkerId} key={elem.id} title={`Посилання ${elem.id} (${elem.title})`} link={`/dashboard/slides/add/${elem.id}`} id={elem.id}/>
+						<DatabaseItem setSelectedId={setSelectedMarkerId} key={elem.id} title={`Посилання ${elem.id} (${elem.title})`} link={`/dashboard/media/add/${elem.id}`} id={elem.id}/>
 					))}
 				</div>
 			</div>

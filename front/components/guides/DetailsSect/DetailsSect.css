@@ -17,21 +17,17 @@
   }
   
   .details h2 {
-    font-size: clamp(26px, 2vw, 23px); /* Динамический размер шрифта */
+    font-size: 23px;
     background-color: #2e2e35;
     color: #E8DCD0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 50px; /* Минимальная высота вместо фиксированной */
-    padding: 10px; /* Добавляем отступы внутри */
-    box-sizing: border-box; /* Учитываем padding в размере */
+    justify-content: center; /* Центрируем текст внутри */
+    width: 350px; /* Фон не слишком широкий */
+    padding: 10px;
     border-radius: 5px;
     margin-bottom: 20px;
-    text-align: center; /* На всякий случай, если flex не сработает */
-}
-
+  }
   
   .details p {
     font-size: 18px;

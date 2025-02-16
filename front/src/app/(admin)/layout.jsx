@@ -6,17 +6,17 @@ export default function AdminLayout({ children }) {
 			<header>
 				<nav className="navbar navbar-expand-lg bg-body-tertiary">
 					<div className="container-lg">
-						<Link className="navbar-brand" href="/dashboard">Адміністратор</Link>
+						<Link style={{fontSize: "26px"}} className="navbar-brand" href="/dashboard">Адміністратор</Link>
 						<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 							<span className="navbar-toggler-icon"></span>
 						</button>
 						<div className="collapse navbar-collapse" id="navbarNavDropdown">
 							<ul className="navbar-nav">
 								<li className="nav-item">
-									<a className="nav-link active" aria-current="page" href="/">Повернутися до сайту</a>
+									<a style={{fontSize: "20px", fontWeight: "bold"}} className="nav-link active" aria-current="page" href="/">Повернутися до сайту</a>
 								</li>
 								<li className="nav-item dropdown">
-									<Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<Link style={{fontSize: "20px"}} className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 										Керування елементами сторінки
 									</Link>
 									<ul className="dropdown-menu">

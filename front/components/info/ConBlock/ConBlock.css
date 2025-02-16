@@ -70,6 +70,7 @@
 
 .conbox .right1 span, .conbox .left h1 {
     position: relative;
+    max-width: 390px;
     z-index: 1;
 }
 
@@ -80,6 +81,12 @@
     font-family: 'intro', sans-serif;
     text-align: center;
     margin: 0;
+}
+
+@media (max-width: 768.03px) {
+    .conboxcontainer {
+        height: 400px;
+    }
 }
 
 @media (max-width: 676px) {
@@ -93,7 +100,9 @@
     }
     .conbox .right1 span, .conbox .left h1 {
         font-size: 24px;
-        max-width: 100%;
+        max-width: none;
+        width: 100%;
+        padding: 40px 20px;
     }
     .conboxcontainer {
         height: auto;

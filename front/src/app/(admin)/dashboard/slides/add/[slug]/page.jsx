@@ -28,8 +28,8 @@ export default function ChangePage() {
 
 	useEffect(() => {
 		if (element != undefined) {
-			setTitle(element.title_uk)
-			setText(element.text_uk)
+			setTitle(element.title)
+			setText(element.text)
 			setFile(element.path)
 			setTextEn(element.text_en)
 			setTitleEn(element.title_en)
@@ -63,7 +63,7 @@ export default function ChangePage() {
 				/>
 			)}
 			<div className="main__form container-lg mt-5">
-				<h1 className="form-title admin-title mb-4">Додати слайд</h1>
+				<h1 className="form-title admin-title mb-4">Змінити слайд</h1>
 				<form className="form needs-validation" onSubmit={handleSubmit}>
 					<div className="ua">
 						<div className="input-group mb-3">

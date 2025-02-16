@@ -11,6 +11,7 @@ import { postData } from "api";
 
 export default function ChangePage() {
   const [title, setTitle] = useState("");
+  const [title_en, setTitleEn] = useState("");
   const [url, setUrl] = useState("");
   const [file, setFile] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -26,6 +27,7 @@ export default function ChangePage() {
     const formData = new FormData();
     formData.append("path", file);
     formData.append("title", title);
+    formData.append("title_en", title_en);
     formData.append("url", url);
 
     postData("medialinks", formData, setShowAlert)
@@ -35,12 +37,12 @@ export default function ChangePage() {
     <main className="main">
       {showAlert && (
         <Alert
-          message="Маркер був доданий успішно!"
+          message="Посилання було успішно додане!"
           onClose={() => setShowAlert(false)}
         />
       )}
       <div className="main__form container-lg mt-5">
-        <h1 className="form-title admin-title mb-4">Додати слайд</h1>
+        <h1 className="form-title admin-title mb-4">Додати посилання</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
           <div className="input-group mb-3">
             <input
@@ -66,6 +68,18 @@ export default function ChangePage() {
             />
           </div>
           <div className="input-group mb-3">
+            <span className="input-group-text" id="inputGroup-sizing-default">Заголовок (англ):</span>
+            <input
+              required
+              type="text"
+              className="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              value={title_en}
+              onChange={(e) => setTitleEn(e.target.value)}
+            />
+          </div>
+          <div className="input-group mb-3">
             <span className="input-group-text" id="inputGroup-sizing-default">Посилання:</span>
             <input
               required
@@ -80,7 +94,7 @@ export default function ChangePage() {
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
-      <Bootstrap/>
+      <Bootstrap />
     </main>
   );
 }

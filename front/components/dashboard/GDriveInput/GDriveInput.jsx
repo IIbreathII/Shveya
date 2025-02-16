@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -16,7 +15,7 @@ export default function GDriveInput({ images, setImages }) {
 	};
 
 	const addField = () => {
-		setImages([...images, { text: "", path: "" }]);
+		setImages([...images, { path: "", text: "", text_en: "" }]);
 	};
 
 	const removeField = (index) => {
@@ -27,23 +26,33 @@ export default function GDriveInput({ images, setImages }) {
 	return (
 		<div>
 			{images.map((item, index) => (
-				<InputGroup className="mb-2" key={index}>
-					<Form.Control
-						type="text"
-						placeholder="Тип зображення"
-						value={item.text}
-						onChange={(e) => handleChange(index, "text", e.target.value)}
-					/>
-					<Form.Control
-						type="text"
-						placeholder="Посилання на зображення"
-						value={item.path}
-						onChange={(e) => handleChange(index, "path", e.target.value)}
-					/>
-					<Button variant="danger" onClick={() => removeField(index)}>
-						x
-					</Button>
-				</InputGroup>
+				<div key={index} className="mb-3">
+					<InputGroup>
+						<Form.Control
+							type="text"
+							placeholder="Тип зображення"
+							value={item.text}
+							onChange={(e) => handleChange(index, "text", e.target.value)}
+						/>
+						<Form.Control
+							type="text"
+							placeholder="Тип зображення (англ)"
+							value={item.text_en}
+							onChange={(e) => handleChange(index, "text_en", e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup className="mb-1">
+						<Form.Control
+							type="text"
+							placeholder="Посилання на зображення"
+							value={item.path}
+							onChange={(e) => handleChange(index, "path", e.target.value)}
+						/>
+						<Button variant="danger" onClick={() => removeField(index)}>
+							x
+						</Button>
+					</InputGroup>
+				</div>
 			))}
 			<Button variant="outline-primary" onClick={addField}>
 				+

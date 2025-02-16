@@ -1,68 +1,43 @@
 .author {
-    margin-bottom: 40px;
-}
-
-.author__container {
-    background-color: #E8DCD0;
-    padding: 25px 20px;
-    border-radius: 2px;
-    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.63);
-    border: 1px solid rgb(117, 117, 117);
-    max-width: 1200px;
-    width: 100%;
-    margin-top: 30px;
-    position: relative;
-}
-
-.author h2 {
-    font-size: 26px; /* Адаптивный размер шрифта */
-    background-color: #2e2e35;
-    color: #E8DCD0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    height: auto;
-    min-height: 60px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    text-align: center;
-    box-sizing: border-box; /* Учитываем padding */
-}
-
-.author__list {
-    background-color: #E8DCD0;
-    color: #2e2e35;
-    padding: 15px 20px;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 26px;
-    font-weight: bold;
-    display: block;
-    max-width: 100%;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.author__list div {
-    padding: 10px 15px;
-    display: block; /* Теперь текст переносится */
-}
-
-/* Адаптация под маленькие экраны */
-@media (max-width: 900px) {
-    .author__container {
-        max-width: 100%;
-        padding: 20px 10px;
-    }
-
-    .author h2 {
-        font-size: 26px;
-        min-height: 50px;
-    }
-
-    .author__list {
-        font-size: 20px;
-    }
-}
+	margin: 0px 0px 40px 0px;
+	/* Убираем центрирование всего содержимого */
+  }
+  
+  .author__container {
+	background-color: #E8DCD0; /* Фон контейнера */
+	padding: 20px; /* Увеличил верхний паддинг, чтобы заголовок влез */
+	border-radius: 2px;
+	box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.63);
+	border: 1px solid rgb(117, 117, 117);
+	max-width: 1200px; /* Устанавливаем максимальную ширину контейнера */
+	margin-left: 0; /* Отменяем автоцентрирование */
+	margin-top: 30px;
+	position: relative;
+  }
+  
+  .author h2 {
+	font-size: 20px;
+	background-color: #2e2e35;
+	color: #E8DCD0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px;
+	border-radius: 5px;
+	width: 250px;
+	margin: 0px 0px 15px 0px;
+  }
+  
+  .author__list {
+	color: #2e2e35;
+	padding: 15px 20px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .author__list div {
+	padding: 10px 15px;
+	white-space: nowrap;
+	display: inline-block;
+  }

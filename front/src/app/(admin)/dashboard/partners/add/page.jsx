@@ -36,7 +36,7 @@ export default function ChangePage() {
         />
       )}
       <div className="main__form container-lg mt-5">
-        <h1 className="form-title admin-title mb-4">Додати статистичну картку</h1>
+        <h1 className="form-title admin-title mb-4">Додати партнера</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
           <div className="input-group mb-3">
             <input

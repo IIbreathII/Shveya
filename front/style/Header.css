@@ -6,6 +6,7 @@
 	background: #2e2e35;
 	height: 75px;
 	width: 100%;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
 }
 
 .header__container {

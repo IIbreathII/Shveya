@@ -1,65 +1,54 @@
-"use client"; // Если используются клиентские функции
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import '$style/Guides.css'
-import Aside from '$component/guides/Aside/Aside';
-import MasterClassSect from '$component/guides/MasterClassSect/MasterClassSect';
-import VideoSect from '$component/guides/VideoSect/VideoSect';
-import ExamplesSect from '$component/guides/ExamplesSect/ExamplesSect';
-import DetailsSect from '$component/guides/DetailsSect/DetailsSect';
-import AuthorSect from '$component/guides/AuthorSect/AuthorSect';
-import ComSect from '$component/guides/ComSect/ComSect';
-import Questions from '$component/guides/Questions/Questions';
-import { useParams } from 'next/navigation';
-import { getData } from 'api';
+import { useEffect, useRef, useState } from "react";
+import "$style/Guides.css";
+import VideoSect from "$component/guides/VideoSect/VideoSect";
+import Questions from "$component/guides/Questions/Questions";
+import { useParams } from "next/navigation";
+import { getData, getEnData } from "api";
+import MasterClassSectEn from "$component/guides_en/MasterClassSectEn/MasterClassSectEn";
+import ExamplesSectEn from "$component/guides_en/ExamplesSectEn/ExamplesSectEn";
+import DetailsSectEn from "$component/guides_en/DetailsSectEn/DetailsSectEn";
+import AuthorSectEn from "$component/guides_en/AuthorSectEn/AuthorSectEn";
 
 export default function MasterClassPage() {
-
   const [categories, setCategories] = useState([]);
   const [guidesData, setGuidesData] = useState({});
-  const firstCategory = useRef();
 
   const params = useParams();
-  const { slug } = params
+  const { slug } = params;
 
   useEffect(() => {
-    getData("categories", setCategories);
+    getEnData("categories", setCategories);
   }, []);
 
   useEffect(() => {
     if (!slug && categories.length > 0) {
       const firstCategory = categories[0];
       if (firstCategory?.subcategories?.length > 0) {
-        getData(
+        getEnData(
           `subcategories/${firstCategory.subcategories[0].id}`,
           setGuidesData
         );
       }
     }
     if (slug) {
-      getData(`subcategories/${slug[1]}`, setGuidesData);
+      getEnData(`subcategories/${slug[1]}`, setGuidesData);
     }
   }, [categories, slug]);
 
-  useEffect(e => {
-    console.log(getData);
-  }, [guidesData])
-
   return (
-    <main className='main'>
-      <div className="content">
+    <div className="guides-container">
+      <div className="container">
         <Questions />
-        {/* Ліва колонка */}
-        <Aside categories={categories} />
-        {/* Основний контент */}
         <main className="main-content">
-          {guidesData.authors ? (
+          {guidesData.authors_en ? (
             <>
-              <MasterClassSect masterClassData={guidesData} />
+              <MasterClassSectEn masterClassData={guidesData} />
               <VideoSect masterClassData={guidesData} />
-              <ExamplesSect masterClassData={guidesData} />
-              <DetailsSect masterClassData={guidesData} />
-              <AuthorSect masterClassData={guidesData} />
+              <ExamplesSectEn masterClassData={guidesData} />
+              <DetailsSectEn masterClassData={guidesData} />
+              <AuthorSectEn masterClassData={guidesData} />
             </>
           ) : (
             <div className="spinner-border" role="status">
@@ -68,6 +57,7 @@ export default function MasterClassPage() {
           )}
         </main>
       </div>
-    </main>
+    </div>
   );
+  
 }

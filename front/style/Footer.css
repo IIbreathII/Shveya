@@ -100,14 +100,16 @@
 }
 
 .column-footer__link:hover img {
-	transform: scale(1.1); /* Увеличение иконки */
-	filter: grayscale(100%) brightness(0); /* Делаем иконку черной */
+	transform: scale(1.1);
+	/* Увеличение иконки */
+	filter: grayscale(100%) brightness(0);
+	/* Делаем иконку черной */
 	opacity: 1;
 }
 
 .footer__bottom {
 	min-height: 40px;
-	background-color: #404046;
+	background-color: #2e2e35;
 }
 
 @media (max-width: 860.23px) {
@@ -121,9 +123,11 @@
 		padding: 50px 15px;
 		gap: 70px;
 	}
+
 	.footer__columns {
 		justify-content: flex-start;
 	}
+
 	.footer__columns {
 		gap: 50px;
 	}
@@ -140,9 +144,11 @@
 		flex-direction: column;
 		width: 100%;
 	}
+
 	.footer__container {
 		flex-direction: column;
 	}
+
 	.footer__column {
 		display: flex;
 		flex-direction: column;

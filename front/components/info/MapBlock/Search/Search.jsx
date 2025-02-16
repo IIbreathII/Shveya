@@ -1,12 +1,15 @@
 import { useContext, useRef, useState } from 'react';
 import "./Search.css"
 import Image from "next/image";
+import { useLang } from '$component/Context/LangContext';
 
 const SearchMarkers = ({ markers, handleZoom }) => {
 	const [query, setQuery] = useState("");
 	const [filteredMarkers, setFilteredMarkers] = useState([]);
 	const [isFocused, setIsFocused] = useState(false);
 	const listRef = useRef(null);
+
+	const { lang } = useLang();
 
 	const handleFocus = () => {
 		setIsFocused(true);
@@ -47,7 +50,7 @@ const SearchMarkers = ({ markers, handleZoom }) => {
 				type="text"
 				value={query}
 				onChange={handleInputChange}
-				placeholder="Знайти відділення..."
+				placeholder={lang == "ua" ? "Знайти відділення..." : "Find a branch..."}
 				className="search__input"
 			/>
 			{filteredMarkers.length > 0 && isFocused && (

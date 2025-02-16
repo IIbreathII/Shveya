@@ -3,6 +3,11 @@
 	min-height: 566px;
 }
 
+.loading-box {
+	display: flex;
+	align-items: center;
+}
+
 .infobox__container {
 	position: relative;
 	max-width: 1200px;
@@ -90,7 +95,7 @@
 .infobox__container1 h1 {
 	font-size: 32px;
 	margin: 0px 0px 30px 0px;
-	background-color: #e5a462;
+	background-color: rgb(82, 223, 129);
 	padding: 5px;
 	border-radius: 5px;
 	color: #2e2e35;
@@ -107,7 +112,7 @@
 
 ._italic {
 	font-style: italic;
-	color: #e5a462;
+	color: rgb(82, 223, 129);
 }
 
 .infobox__container1 h2 p:not(:last-child) {
@@ -191,7 +196,7 @@
 }
 
 .bullet-active {
-	background-color: #e5a462;
+	background-color: rgb(82, 223, 129);
 }
 
 @media (max-width: 900px) {

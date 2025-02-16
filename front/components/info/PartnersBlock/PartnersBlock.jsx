@@ -1,3 +1,5 @@
+"use client"
+
 import { getData } from "api";
 import "./PartnersBlock.css"
 import Image from "next/image";

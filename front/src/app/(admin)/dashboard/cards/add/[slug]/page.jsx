@@ -35,7 +35,7 @@ export default function ChangePage() {
 		}
 	}, [element]);
 
-	const handleSubmit = async (e, id) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!file) {
@@ -50,7 +50,7 @@ export default function ChangePage() {
 		formData.append("description_en", description);
 		formData.append("path", file);
 
-		changeData("cards", id, formData, setShowAlert)
+		changeData("cards", slug, formData, setShowAlert)
 	};
 
 	return (
@@ -63,7 +63,7 @@ export default function ChangePage() {
 			)}
 			<div className="main__form container-lg mt-5">
 				<h1 className="form-title admin-title mb-4">Змінити картку</h1>
-				<form className="form needs-validation" onSubmit={(e) => handleSubmit(e, slug)}>
+				<form className="form needs-validation" onSubmit={handleSubmit}>
 					<div className="input-group mb-3">
 						<input
 							required

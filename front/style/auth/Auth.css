@@ -4,6 +4,12 @@
 	justify-content: center;
 }
 
+.button-group {
+	display: flex;  /* Включаем flexbox */
+    flex-direction: row; /* Устанавливаем в строку */
+    gap: 10px; /* Отступы между элементами */
+}
+
 .login-form {
 	min-width: 400px;
 	margin: 0 auto;
@@ -57,4 +63,26 @@
 	position: absolute;
 	bottom: 10px;
 	left: 20px;
+}
+
+.google-button {
+	right: auto;
+	width: 50px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #cfd3b0;
+	border: none;
+	border-radius: 8px; /* Скругление углов, можно убрать */
+	cursor: pointer;
+	transition: background 0.3s;
+	background-image: url("../../public/images/google.png"); /* Путь к иконке */
+	background-size: 45%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.google-button:hover {
+	background-color: #0056b3;
 }

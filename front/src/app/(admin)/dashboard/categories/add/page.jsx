@@ -11,13 +11,20 @@ import { postData } from "api";
 
 export default function ChangePage() {
   const [title, setTitle] = useState("");
+  const [title_en, setTitleEn] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!title) {
+      alert("Будь ласка, заповніть всі поля");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("category", title);
+    formData.append("category_en", title_en);
 
     postData("categories", formData, setShowAlert)
   };
@@ -45,10 +52,22 @@ export default function ChangePage() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+          <div className="input-group mb-3">
+            <span className="input-group-text" id="inputGroup-sizing-default">Назва (англ):</span>
+            <input
+              required
+              type="text"
+              className="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+              value={title_en}
+              onChange={(e) => setTitleEn(e.target.value)}
+            />
+          </div>
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
-      <Bootstrap/>
+      <Bootstrap />
     </main>
   );
 }

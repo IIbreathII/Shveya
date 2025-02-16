@@ -4,10 +4,16 @@ import '$style/globals.css'
 import Header from '$component/Header'
 import { usePathname } from 'next/navigation';
 import Footer from '$component/Footer';
+import { LangProvider } from '$component/Context/LangContext';
+import { useEffect } from 'react';
 
 export default function RootLayout({ children }) {
 
   const path = usePathname()
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
 
   return (
 
@@ -24,19 +30,21 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
-        <link href="https://fonts.googleapis.com/css2?family=Neucha&family=Unbounded:wght@200..900&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Neucha&family=Unbounded:wght@200..900&display=swap" rel="stylesheet" />
       </head>
 
       <body>
-        <div className='wrapper'>
-          {!path.includes('dashboard') &&
-            <Header></Header>
-          }
-          {children}
-          {!path.includes('dashboard') && !path.includes('guides') &&
-            <Footer></Footer>
-          }
-        </div>
+        <LangProvider>
+          <div className='wrapper'>
+            {!path.includes('dashboard') &&
+              <Header></Header>
+            }
+            {children}
+            {!path.includes('dashboard') && !path.includes('guides') && !path.includes('auth') &&
+              <Footer></Footer>
+            }
+          </div>
+        </LangProvider>
       </body>
     </html>
   );

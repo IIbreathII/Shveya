@@ -1,10 +1,9 @@
 .media {
-	padding: 80px 0px 60px 0px;
+	padding: 80px 15px 60px 15px;
 }
 
 .media__container {
 	max-width: 1200px;
-	padding: 0px 15px;
 	margin: 0 auto;
 }
 
@@ -69,12 +68,12 @@
 .media-pagination {
 	display: flex;
 	justify-content: center;
-	gap: 12px;
+	gap: 12px !important;
 }
 
 @media (max-width: 768.03px) {
 	.media {
-		padding: 50px 0px 40px 0px;
+		padding: 50px 15px 40px 15px;
 	}
 }
 
@@ -87,7 +86,7 @@
 		left: 15px;
 	}
 	.media {
-		padding: 40px 0px 40px 0px;
+		padding: 40px 15px 40px 15px;
 	}
 	.media-pagination {
 		margin: 20px 0px 0px 0px;

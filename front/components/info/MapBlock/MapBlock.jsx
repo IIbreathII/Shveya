@@ -4,38 +4,19 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import SearchMarkers from "$component/info/MapBlock/Search/Search";
-import Image from "next/image";
+import { useLang } from "$component/Context/LangContext";
+import Link from "next/link";
+import { getData } from "api";
 
 const MapBlock = () => {
 	const [selectedPoint, setSelectedPoint] = useState(null);
+	const [markers, setMarkers] = useState([]);
 
-	// отримані данні із серверу
-	const markers = [
-		{
-			id: 1,
-			lat: 50.4501,
-			lng: 30.5234,
-			title: "Київське відділення",
-			adress: "Вулиця *****, будинок 14",
-			phone: "+380667328474"
-		},
-		{
-			id: 2,
-			lat: 48.463393,
-			lng: 36.427997,
-			title: "Петропавлівка",
-			adress: "Вулиця *****, будинок 14",
-			phone: "+380667328474"
-		},
-		{
-			id: 3,
-			lat: 18.463393,
-			lng: 26.427997,
-			title: "Нью-йорк",
-			adress: "Вулиця *****, будинок 14",
-			phone: "+380667328474"
-		},
-	]
+	const { lang } = useLang();
+
+	useEffect(() => {
+		getData("markers", setMarkers)
+	}, [])
 
 	const customIcon = L.icon({
 		iconUrl: 'images/map/location.svg',
@@ -46,7 +27,7 @@ const MapBlock = () => {
 
 	const ZoomToPoint = ({ lat, lng }) => {
 		const map = useMap();
-		map.flyTo([lat, lng], 10);
+		map.flyTo([lat, lng], 6);
 		return null;
 	};
 
@@ -57,12 +38,13 @@ const MapBlock = () => {
 	return (
 		<div className="map">
 			<div className="map__container">
-				<h2 className="map__title _main-title">Знайти нас на мапі</h2>
+				<h2 className="map__title _main-title">{lang == "ua" ? "Знайти нас на мапі" : "Find us on the map"}</h2>
 				<SearchMarkers markers={markers} handleZoom={handleZoom} />
 				<div className="map__body">
 					<MapContainer
-						center={[0, 0]}
-						zoom={2}
+						center={[50.27, 30.31]}
+						zoom={5}
+						maxZoom={6}
 						style={{ height: '100%', width: '100%', borderRadius: "5px" }}
 					>
 						<TileLayer
@@ -80,8 +62,7 @@ const MapBlock = () => {
 							>
 								<Popup>
 									<h1 className="marker__title">{marker.title}</h1>
-									<div className="marker__street">{marker.adress}</div>
-									<div className="marker__number">Номер телефону:<br />{marker.phone}</div>
+									<div className="marker__number">Зв'язатися з нами:<br /><Link href={marker.link ? marker.link : "#"}>{marker.link ? marker.link : "Посилання відсутнє"}</Link></div>
 								</Popup>
 							</Marker>
 						)}

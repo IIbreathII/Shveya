@@ -20,7 +20,12 @@ export default function ChangePage() {
     e.preventDefault();
 
     if (!file) {
-      alert("Пожалуйста, выберите файл");
+      alert("Будь ласка, оберіть файл");
+      return;
+    }
+
+    if (!text || !text_en || !title || !title_en) {
+      alert("Будь ласка, заповніть всі поля");
       return;
     }
 

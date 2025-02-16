@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import "$style/Footer.css"
+import { useLang } from "./Context/LangContext";
 
 const Footer = () => {
+
+	const { lang } = useLang();
+
 	return (
 		<footer className="footer">
 			<div className="_background"></div>
@@ -15,11 +19,11 @@ const Footer = () => {
 							width={180}
 							height={180}
 						/>
-						Швейна рота
+						{lang == "ua" ? "Швейна рота" : "Shveina rota"}
 					</div>
 					<div className="footer__columns">
 						<div className="footer__column column-footer">
-							<div className="column-footer__title">Соц мережі</div>
+							<div className="column-footer__title">{lang == "ua" ? "Соц мережі" : "Social media"}</div>
 							<div className="column-footer__body">
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="t.me/shveina_rota">
@@ -68,46 +72,41 @@ const Footer = () => {
 							</div>
 						</div>
 						<div className="footer__column column-footer">
-							<div className="column-footer__title">Категорії одягу</div>
+							<div className="column-footer__title">{lang == "ua" ? "Категорії одягу" : "Categories"}</div>
 							<div className="column-footer__body">
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="#">
-										Кіберодяг
+										{lang == "ua" ? "Кіберодяг" : "Cyberclothing"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="#">
-										Бронеодяг
-									</Link>
-								</div>
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="#">
-										Аксесуари
+										{lang == "ua" ? "Бронеодяг" : "Broneodyag"}
 									</Link>
 								</div>
 							</div>
 						</div>
 						<div className="footer__column column-footer">
-							<div className="column-footer__title">Спільнота</div>
+							<div className="column-footer__title">{lang == "ua" ? "Спільнота" : "Community"}</div>
 							<div className="column-footer__body">
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/guides">
-										Навчальні матеріали
+									{lang == "ua" ? "Навчальні матеріали" : "Training center"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/about">
-										Про нас
+									{lang == "ua" ? "Про нас" : "About us"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/questions">
-										Відповіді на питання
+										{lang == "ua" ? "Відповіді на питання" : "Answers to questions"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="#">
-										Підтримати донатом
+										{lang == "ua" ? "Підтримати донатом" : "Support with a donation"}
 									</Link>
 								</div>
 							</div>
