@@ -186,6 +186,10 @@ body {
   background-color: #2e2e3575;
 }
 
+.popup {
+  display: none;
+}
+
 @media (max-width: 678px) {
   ._main-title {
     font-size: 24px;
@@ -215,6 +219,14 @@ body {
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Caviar Dreams Bold';
+  src: url('../fonts/Caviar_Dreams_Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 
 /* Для лучшего поведения на мобильных устройствах */
 @media (max-width: 768px) {

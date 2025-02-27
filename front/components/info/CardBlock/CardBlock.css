@@ -1,102 +1,53 @@
-/* Контейнер для карточек */
 .cardbox {
-	min-height: 200px;
-	background: #2e2e35;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.562);
+    min-height: 200px;
+    background: #2e2e35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.562);
+    padding: 20px;
+  }
+  
+  .cardbox__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1170px;
+    width: clamp(100%);
+    margin: 20px 0;
+    align-items: stretch; /* Все карточки растягиваются до одинаковой высоты */
+  }
+  
+  .card {
+    background-color: #1e1e25;
+    border-radius: 6px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    width: clamp(300px, 40vw, 700px);
+    min-width: 260px;
+    max-width: 500px; /* Ограничение по ширине */
+    width: clamp(auto);
+    min-height: 160px; /* Минимальная высота карточки */
+    /* Для абсолютного позиционирования иконки */
+    display: flex;
+    flex-direction: column;
+   ; /* Контент привязан к верху */
+    justify-content: center;
+    flex-grow: 1;
+    box-sizing: border-box;
+    flex-direction: row; /* Чтобы текст и иконка были в ряд */
 }
 
-.cardbox__container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 5px;
-	max-width: 1170px;
-	width: 100%;
-	overflow: hidden;
-	margin: 20px 0;
-	/* Добавляет расстояние сверху и снизу */
-}
-
-/* Стили для карточек */
-/* Карточка */
-.card {
-	position: relative;
-	flex: 1 1 23%;
-	min-width: 277.5;
-	padding: 35px 20px;
-	border-radius: 2px;
-	width: 100%;
-	background-color: #40404654;
-}
-
-.card__top {
-	position: relative;
-	color: #eee;
-	font-size: 24px;
-	gap: 18px;
-	margin: 0px 0px 9px 0px;
-	display: flex;
-	align-items: center;
-	flex-direction: row-reverse;
-	justify-content: flex-end;
-}
-
-.card__top img {
-	width: 35px;
-	height: 35px;
-}
-
-
-/* .card__top .iconshveya {
-	width: 45px;
-	min-width: 45px;
-}
-
-.card__top .iconshveya img {
-	width: 45px;
-} */
-
-.card__title {
-	font-family: "unbounded", Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	font-weight: bold;
-	text-align: left;
-	font-weight: bold;
-	margin: 0px 0px 12px 0px;
-	max-width: 700px;
-	color: #eee;
-}
-
-/* Нижняя часть карточки */
-.card__bottom {}
-
-.card__number {
-	font-size: 38px;
-	font-family: 'intro', sans-serif;
-	color: #eee;
-	text-align: left;
-	position: relative;
-	z-index: 2;
-}
-
-@media (max-width: 768.03px) {
-	.card__number {
-		font-size: 34px;
-	}
-}
-
-/* Адаптивный стиль */
-/* @media (max-width: 901px) {
-	.cardbox__container {
-		flex-direction: column;
-		align-items: center;
-	}
-
-	.card {
-		flex: 1 1 100%;
-		width: 100%;
-	}
-} */
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .card__number {
+      font-size: 34px;
+    }
+  }
+  

@@ -1,17 +1,15 @@
-import { motion } from "framer-motion"
-import Card, { MCard } from "./Card/Card";
-import "./CardBlock.css"
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import Card from "./Card/Card";
+import "./CardBlock.css";
 import { getData } from "api";
 
 const CardBlock = () => {
+  const [cards, setCards] = useState([]);
 
-	const [cards, setCards] = useState([]);
+  useEffect(() => {
+    getData("cards", setCards);
+  }, []);
 
-	useEffect(() => {
-		getData("cards", setCards)
-	}, [])
 
 	// const cards = [
 	// 	{
@@ -42,15 +40,18 @@ const CardBlock = () => {
 
 	return (
 		<div className="cardbox">
-			<div
-				className="cardbox__container"
-			>
-				{cards.map(card => 
-					<Card key={card.id} title={card.title} number={card.description} img={card.path}/>
-				)}
-			</div>
+		  <div className="cardbox__container">
+			{cards.map((card) => (
+			  <Card 
+				key={card.id} 
+				title={card.title} 
+				number={card.description} 
+				img={card.path} 
+			  />
+			))}
+		  </div>
 		</div>
-	);
-};
-
-export default CardBlock;
+	  );
+	};
+	
+	export default CardBlock;
