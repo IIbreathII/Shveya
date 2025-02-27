@@ -1,0 +1,4 @@
+.leaflet-grab,
+.leaflet-dragging {
+	cursor: crosshair !important;
+}

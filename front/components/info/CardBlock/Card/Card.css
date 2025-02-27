@@ -1,0 +1,67 @@
+.card_top .right{
+    height: 70%;
+    width: clamp(70%);
+}
+
+
+/* Иконка блок*/
+.card_top{
+    gap: 40px;
+    height: auto;
+    width: clamp(auto);
+    flex-direction: row;
+    display:flex ;
+    justify-content: center;
+    
+}
+
+
+/* Иконка */
+.card__icon {
+
+    display: flex;
+    align-self: center;
+    
+    
+    
+}
+
+/* Блок с текстом */
+.card__content {
+    max-width: calc(100% - 70px);
+    padding-top: 10px;
+    flex-direction: column;
+    align-self: center;
+    width: clamp(auto);
+    flex-grow: 1;
+    height: 100%;
+    /* Центрируем весь текстовый блок внутри карточки */
+    gap: 5px;
+}
+
+/* Число */
+.card__number {
+    
+    font-family: 'Caviar Dreams Bold', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: #f5e6d3;
+    align-self: flex-end;
+    /* Центрируем число относительно родительского блока */
+    
+}
+
+/* Заголовок */
+.card__title {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: normal;
+    color: #f5e6d3;
+    font-family: 'Caviar Dreams Bold', sans-serif;
+    max-width: 100%;
+    word-wrap: break-word;
+    /* Делаем текст выровненным по центру */
+    text-align: center;
+    align-self: flex-end;
+    width: clamp(auto);
+}

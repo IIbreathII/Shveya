@@ -1,0 +1,72 @@
+.search {
+	max-width: 1200px;
+	padding: 0px 15px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.search__input {
+	width: 100%;
+	max-width: 450px;
+	padding: 8px;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+	border-radius: 8px;
+	background-color: #2e2e35;
+	font-family: "Anonymus", sans-serif;
+	/* Новый шрифт */
+	font-size: 18px;
+	font-weight: 600;
+	text-align: left;
+	color: #E8DCD0;
+	border: 2px solid #E8DCD0;
+	outline: none;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.search__input:focus {
+	background-color: #E8DCD0;
+	color: #2e2e35;
+	border-color: #2e2e3e;
+}
+
+.search__list {
+	position: absolute;
+	top: 100%;
+	left: 15px;
+	z-index: 1500;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-radius: 8px;
+	background-color: #2e2e35;
+	box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.5);
+	max-width: 450px;
+	overflow: hidden;
+	border: 2px solid #E8DCD0;
+}
+
+.search__item {
+	padding: 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	font-family: "Anonymus", sans-serif;
+	font-size: 18px;
+	font-weight: 500;
+	text-align: left;
+	color: #E8DCD0;
+	text-decoration: none;
+	max-width: 100%;
+	word-wrap: break-word;
+	border: 2px solid transparent;
+	/* Убираем изначальный бордер */
+}
+
+.search__item:hover {
+	background-color: #E8DCD0;
+	color: #2e2e35;
+
+}
