@@ -1,22 +1,31 @@
 .conboxcontainer {
-    height: 500px;
-    width: clamp(300px, 100%, 1400px);
+    height: clamp(400px, 50vh, 700px);
+    width: clamp(300px, 100vw, 1400px);
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 70px 0px;
+    margin: 70px auto;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .conboxcontainer .conbox {
     height: 100%;
     max-width: 1200px;
     padding: 0px 15px;
-    width: clamp(320px, 90%, 1200px);
+    width: clamp(320px, 90vw, 1200px);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    text-align: center;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 auto;
 }
 
 .conbox .left, .conbox .right1 {
@@ -27,7 +36,7 @@
     align-items: center;
     position: relative;
     color: #2e2e35;
-    font-size: 32px;
+    font-size: clamp(28px, 3vw, 36px);
     text-align: center;
     transition: background 0.8s ease, opacity 0.8s ease;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.42);
@@ -35,6 +44,8 @@
     background-color: #e8dcd0a2;
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 8px;
 }
 
 @media (hover: hover) {
@@ -72,20 +83,15 @@
     position: relative;
     max-width: 390px;
     z-index: 1;
-}
-
-.conbox .left h1 {
-    max-width: 454px;
-    font-size: 32px;
-    color: #2e2e35;
-    font-family: 'intro', sans-serif;
     text-align: center;
-    margin: 0;
+    font-size: clamp(28px, 3vw, 36px);
+    font-family: 'intro', sans-serif;
+    margin: 0 auto;
 }
 
 @media (max-width: 768.03px) {
     .conboxcontainer {
-        height: 400px;
+        height: clamp(300px, 45vh, 600px);
     }
 }
 
@@ -93,13 +99,16 @@
     .conbox {
         flex-direction: column;
         gap: 60px;
+        align-items: center;
     }
     .conbox .right1, .conbox .left {
         width: clamp(280px, 100%, 600px);
         height: auto;
+        text-align: center;
+        border-radius: 8px;
     }
     .conbox .right1 span, .conbox .left h1 {
-        font-size: 24px;
+        font-size: clamp(20px, 2.5vw, 24px);
         max-width: none;
         width: 100%;
         padding: 40px 20px;

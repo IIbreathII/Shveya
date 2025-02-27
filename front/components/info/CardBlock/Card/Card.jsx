@@ -5,6 +5,7 @@ import "./Card.css";
 
 const Card = ({ title, number, img }) => {
   const [count, setCount] = useState(0);
+  const [fontSize, setFontSize] = useState('20px'); // Состояние для размера шрифта
   const ref = useRef(null);
   const hasAnimated = useRef(false); // Флаг, чтобы не перезапускать анимацию
 
@@ -44,6 +45,16 @@ const Card = ({ title, number, img }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [number]);
 
+  // Динамическое изменение шрифта в зависимости от длины текста
+  useEffect(() => {
+    const titleLength = title.length;
+    if (titleLength > 50) {
+      setFontSize('16px'); // Уменьшаем шрифт, если текста много
+    } else {
+      setFontSize('20px'); // Оставляем стандартный размер шрифта
+    }
+  }, [title]);
+
   const blockAnimation = {
     hidden: { y: 70, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { delay: 0.2 } },
@@ -58,19 +69,18 @@ const Card = ({ title, number, img }) => {
       className="card"
       variants={blockAnimation}
     >
-   
       <div className="card__content">
         <div className="card_top">
-        <Image
-          src={'http://drive.google.com/uc?export=view&id=' + img}
-          height={55}
-          width={55}
-          alt="icon"
-        />
-        <p className="card__number">{count.toLocaleString()}</p>
+          <Image
+            src={'http://drive.google.com/uc?export=view&id=' + img}
+            height={55}
+            width={55}
+            alt="icon"
+          />
+          <p className="card__number">{count.toLocaleString()}</p>
         </div>
-        
-        <h1 className="card__title">{title}</h1>
+
+        <h1 className="card__title" style={{ fontSize: fontSize }}>{title}</h1> {/* Применяем динамический размер шрифта */}
       </div>
     </motion.div>
   );

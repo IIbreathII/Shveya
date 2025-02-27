@@ -75,7 +75,10 @@
   .side-bot-About {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     margin-left: 20px;
+=======
+>>>>>>> 5f9ce95051d362922be42116472a15616fc16ec7
   }
   .about-text {
     width: 550px;
@@ -108,7 +111,10 @@
 }
 
 @media (max-width: 1280px) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5f9ce95051d362922be42116472a15616fc16ec7
   .Left-side-About {
     width: 100%;
   }
@@ -131,9 +137,13 @@
 }
 
 @media (max-width: 660px) {
+<<<<<<< HEAD
   .about-title {
   font-size: 25px;
 }
+=======
+  
+>>>>>>> 5f9ce95051d362922be42116472a15616fc16ec7
 
   .about-text {
     width: 400px;
@@ -145,7 +155,11 @@
 @media (max-width: 400px) {
   .column_about {
   
+<<<<<<< HEAD
     width: 225px;
+=======
+    width: 300px;
+>>>>>>> 5f9ce95051d362922be42116472a15616fc16ec7
 
   }
 
