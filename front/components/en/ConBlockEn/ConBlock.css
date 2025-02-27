@@ -74,7 +74,7 @@
 .conbox .right1 span,
 .conbox .left h1 {
     position: relative;
-    max-width: 390px;
+    max-width: 390px !important;
     z-index: 1;
 }
 

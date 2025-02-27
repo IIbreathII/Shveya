@@ -12,7 +12,7 @@ const PartnersBlock = () => {
 
 	useEffect(() => {
 		getData("partners", setPartners)
-	},[])
+	}, [])
 
 	return (
 		<div className="partners">
@@ -30,11 +30,13 @@ const PartnersBlock = () => {
 								delay: 1000,
 								disableOnInteraction: false,
 							}}
+							observer={true}
+							observeParents={true}
 						>
 							{partners.map(partner =>
 								<SwiperSlide className="partners__slide" key={partner.id}>
 									<div className="partners__partner">
-										<img src={process.env.BACK_URL_IMG + partner.path} alt="img" />
+										<Image src={'http://drive.google.com/uc?export=view&id=' + partner.path} width={130} height={130} alt="img" />
 									</div>
 								</SwiperSlide>
 							)}

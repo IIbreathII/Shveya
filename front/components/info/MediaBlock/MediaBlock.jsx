@@ -204,6 +204,7 @@ const MediaBlock = () => {
 					}
 
 				</Swiper>
+				{/* Кнопки слайдера */}
 				<div className="swiper-buttons__container">
 					<div className="swiper-button-prev">
 						<div className="next-img">

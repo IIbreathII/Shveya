@@ -31,7 +31,7 @@ const Card = forwardRef(({ title, number, img }, ref) => {
 			<div className="card__top">
 				<p className="card__number">{number}</p>
 				<Image
-					src={process.env.BACK_URL_IMG + img}
+					src={'http://drive.google.com/uc?export=view&id=' + img}
 					height={30}
 					width={30}
 					alt="icon"

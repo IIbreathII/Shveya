@@ -61,6 +61,7 @@
 	font-size: 18px;
 	position: relative;
 	display: inline-block;
+	width: 100%;
 }
 
 .column-footer__link {
@@ -70,6 +71,7 @@
 	gap: 9px;
 	align-items: center;
 	transition: all 0.1s ease 0s;
+	font-family: sans-serif;
 }
 
 /* Ховер-эффект для ссылок */

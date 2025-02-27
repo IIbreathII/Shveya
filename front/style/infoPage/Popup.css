@@ -14,6 +14,10 @@
 	animation: popupAnim 0.1s linear forwards;
 }
 
+.menu-active .popup {
+	display: block;
+}
+
 /* Анимация для вылетающего окна */
 @keyframes popupAnim {
 	from {

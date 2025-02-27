@@ -39,13 +39,25 @@
 	pointer-events: none;
 }
 
+/* Кнопки слайдера ============================================================= */
 .swiper-button-prev, .swiper-button-next {
 	pointer-events: auto;
 	cursor: pointer;
+	border-radius: 3px 0px 0px 3px;
 	border-top: 2px solid #e0872d;
 	border-bottom: 2px solid #e0872d;
 	padding: 6px;
+	height: 63px;
+	width: 43px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	/* background-color: #2e2e35; */
+}
+
+.swiper-button-prev img, .swiper-button-next img {
+	height: 24px;
+	width: 12px;
 }
 
 .swiper-button-prev {

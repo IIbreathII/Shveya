@@ -55,7 +55,7 @@ export default function AboutPage() {
 						<h1 className="_main-title">Наша команда</h1>
 					</div>
 					<Swiper
-						modules={[Pagination, Navigation]}
+						modules={[Pagination]}
 						spaceBetween={20}
 						slidesPerView={1}
 						autoHeight={true}
@@ -71,7 +71,6 @@ export default function AboutPage() {
 							bulletClass: "swiper-bullet",
 							bulletActiveClass: "bullet-active",
 						}}
-						navigation
 						className="team__members"
 					>
 						{teamMembers.map((member, index) => (

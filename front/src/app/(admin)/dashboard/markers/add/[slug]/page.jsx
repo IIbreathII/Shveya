@@ -9,6 +9,7 @@ const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'),
 import Alert from "$component/dashboard/Alert/Alert";
 import { changeData, getData, postData } from "api";
 import { useParams } from "next/navigation";
+import MapPicker from "$component/dashboard/MapPicker/MapPicker";
 
 export default function ChangePage() {
 	const [lat, setLat] = useState("");
@@ -64,6 +65,9 @@ export default function ChangePage() {
 			)}
 			<div className="main__form container-lg mt-5">
 				<h1 className="form-title admin-title mb-4">Змінити маркер на карті</h1>
+
+				<MapPicker lat={lat} lng={lng} setLat={setLat} setLng={setLng} />
+
 				<form className="form needs-validation" onSubmit={handleSubmit}>
 					<div className="input-group mb-3">
 						<span className="input-group-text" id="inputGroup-sizing-default">Широта:</span>

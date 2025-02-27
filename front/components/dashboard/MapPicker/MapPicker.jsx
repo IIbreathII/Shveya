@@ -32,7 +32,7 @@ const MapPicker = ({ lat, lng, setLat, setLng }) => {
 		<MapContainer
 			center={position}
 			zoom={4}
-			style={{ height: "300px", width: "100%", borderRadius: "5px", marginBottom: "20px" }}
+			style={{ height: "300px", width: "100%", maxWidth: "900px", border: "1px solid #000", borderRadius: "5px", marginBottom: "20px" }}
 		>
 			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 			<MapClickHandler />

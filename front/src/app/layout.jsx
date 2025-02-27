@@ -5,15 +5,36 @@ import Header from '$component/Header'
 import { usePathname } from 'next/navigation';
 import Footer from '$component/Footer';
 import { LangProvider } from '$component/Context/LangContext';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import PopupLink from '$component/en/ConBlockEn/PopupLink/PopupLink';
 
 export default function RootLayout({ children }) {
 
-  const path = usePathname()
+  const path = usePathname();
+  const popup = useRef();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [path]);
+
+  // Закрытие окна при нажатии на крестик
+  function closePopup() {
+    document.body.classList.remove("menu-active");
+    document.querySelector(".wrapper").style.paddingRight = "0px";
+    document.querySelector(".header").style.paddingRight = "0px";
+  }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("click", (event) => {
+        if (event.target === popup.current) {
+          document.body.classList.remove("menu-active");
+          document.querySelector(".wrapper").style.paddingRight = "0px";
+          document.querySelector(".header").style.paddingRight = "0px";
+        }
+      });
+    }
+  }, []);
 
   return (
 
@@ -35,6 +56,15 @@ export default function RootLayout({ children }) {
 
       <body>
         <LangProvider>
+          <div ref={popup} id="popup" className="popup">
+            <div className="popup-content">
+              <span onClick={closePopup} id="closeBtn" className="popup__close">
+                &times;
+              </span>
+              <PopupLink href="https://www.paypal.com" text="marishka.polo@gmail.com" img="/images/paypal.jpg" />
+              <PopupLink href="https://send.monobank.ua/jar/5VV7zhDJGY" text="5375 4112 0381 7304" img="/images/mono.jpg" />
+            </div>
+          </div>
           <div className='wrapper'>
             {!path.includes('dashboard') &&
               <Header></Header>

@@ -2,10 +2,30 @@ import Image from "next/image";
 import Link from "next/link";
 import "$style/Footer.css"
 import { useLang } from "./Context/LangContext";
+import { useEffect, useState } from "react";
+import { getData } from "api";
+import { Button } from "react-bootstrap";
+import { useScrollbarWidth } from "$hooks/useScrollbarWidth";
 
 const Footer = () => {
-
+	const [mediaLinks, setMediaLinks] = useState([]);
+	const [categories, setCategories] = useState([]);
 	const { lang } = useLang();
+
+	const scrollbarWidth = useScrollbarWidth();
+
+	// Открытие окна
+	function openPopup() {
+		document.body.classList.add("menu-active");
+		document.querySelector(".wrapper").style.paddingRight = scrollbarWidth + "px";
+		document.querySelector(".header").style.paddingRight = scrollbarWidth + "px";
+	}
+
+	useEffect(() => {
+		getData("medialinks", setMediaLinks)
+
+		getData("categories/all", setCategories)
+	}, [])
 
 	return (
 		<footer className="footer">
@@ -25,65 +45,39 @@ const Footer = () => {
 						<div className="footer__column column-footer">
 							<div className="column-footer__title">{lang == "ua" ? "Соц мережі" : "Social media"}</div>
 							<div className="column-footer__body">
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="t.me/shveina_rota">
-										<Image
-											src="/images/footer/telegram.png"
-											alt="logo"
-											width={35}
-											height={35}
-										/>
-										Telegram
-									</Link>
-								</div>
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="t.me/shveina_rota">
-										<Image
-											src="/images/footer/instagram.png"
-											alt="logo"
-											width={35}
-											height={35}
-										/>
-										Instagram
-									</Link>
-								</div>
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="t.me/shveina_rota">
-										<Image
-											src="/images/footer/facebook.png"
-											alt="logo"
-											width={35}
-											height={35}
-										/>
-										Facebook
-									</Link>
-								</div>
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="https://www.facebook.com/p/%D0%A8%D0%B2%D0%B5%D0%B9%D0%BD%D0%B0-%D1%80%D0%BE%D1%82%D0%B0-100083407995435/?locale=uk_UA">
-										<Image
-											src="/images/footer/youtube.png"
-											alt="logo"
-											width={35}
-											height={35}
-										/>
-										Youtube
-									</Link>
-								</div>
+								{mediaLinks.map(link =>
+									<div key={link.id} className="column-footer__row">
+										<Link target="_blank" className="column-footer__link" href={link.url}>
+											<Image
+												src={'http://drive.google.com/uc?export=view&id=' + link.path}
+												alt="logo"
+												width={35}
+												height={35}
+											/>
+											{link.title}
+										</Link>
+									</div>
+								)}
 							</div>
 						</div>
 						<div className="footer__column column-footer">
 							<div className="column-footer__title">{lang == "ua" ? "Категорії одягу" : "Categories"}</div>
 							<div className="column-footer__body">
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="#">
-										{lang == "ua" ? "Кіберодяг" : "Cyberclothing"}
-									</Link>
-								</div>
-								<div className="column-footer__row">
-									<Link className="column-footer__link" href="#">
-										{lang == "ua" ? "Бронеодяг" : "Broneodyag"}
-									</Link>
-								</div>
+								{categories.length > 0 &&
+									<>
+										{categories.map(cat =>
+											<div key={cat.id}>
+												{cat.subcategories.length > 0 &&
+													<div className="column-footer__row">
+														<Link className="column-footer__link" href={`/guides/${cat.subcategories[0].subcategory.toLowerCase()}/${cat.subcategories[0].id}`}>
+															{lang == "ua" ? <>{cat.category}</> : <>{cat.category_en}</>}
+														</Link>
+													</div>
+												}
+											</div>
+										)}
+									</>
+								}
 							</div>
 						</div>
 						<div className="footer__column column-footer">
@@ -91,12 +85,12 @@ const Footer = () => {
 							<div className="column-footer__body">
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/guides">
-									{lang == "ua" ? "Навчальні матеріали" : "Training center"}
+										{lang == "ua" ? "Навчальні матеріали" : "Training center"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/about">
-									{lang == "ua" ? "Про нас" : "About us"}
+										{lang == "ua" ? "Про нас" : "About us"}
 									</Link>
 								</div>
 								<div className="column-footer__row">
@@ -105,9 +99,9 @@ const Footer = () => {
 									</Link>
 								</div>
 								<div className="column-footer__row">
-									<Link className="column-footer__link" href="#">
+									<Button onClick={openPopup} className="column-footer__link">
 										{lang == "ua" ? "Підтримати донатом" : "Support with a donation"}
-									</Link>
+									</Button>
 								</div>
 								<div className="column-footer__row">
 									<Link className="column-footer__link" href="/dashboard">

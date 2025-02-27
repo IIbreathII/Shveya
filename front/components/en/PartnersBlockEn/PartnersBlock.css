@@ -40,3 +40,7 @@
 	align-items: center;
 	user-select: none;
 }
+
+.partners .swiper-slide {
+	width: auto !important;
+}

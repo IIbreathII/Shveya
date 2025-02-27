@@ -9,9 +9,10 @@ import Alert from "$component/dashboard/Alert/Alert";
 import { changeData, getData, postData } from "api";
 import { useParams } from "next/navigation";
 import FileInput from "$component/dashboard/FileInput/FileInput";
+import ImageInput from "$component/dashboard/ImageInput/ImageInput";
 
 export default function ChangePage() {
-	const [file, setFile] = useState(null);
+	const [file, setFile] = useState("");
 	const [showAlert, setShowAlert] = useState(false);
 
 	const params = useParams();
@@ -42,7 +43,7 @@ export default function ChangePage() {
 			<div className="main__form container-lg mt-5">
 				<h1 className="form-title admin-title mb-4">Змінити партнера</h1>
 				<form className="form needs-validation" onSubmit={handleSubmit}>
-					<FileInput isRequired={true} setFile={setFile} />
+					<ImageInput image={file} setImage={setFile}/>
 					<button type="submit" className="btn btn-primary">Save</button>
 				</form>
 			</div>

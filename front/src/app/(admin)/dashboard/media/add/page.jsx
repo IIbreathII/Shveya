@@ -9,19 +9,20 @@ const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'),
 import Alert from "$component/dashboard/Alert/Alert";
 import { postData } from "api";
 import FileInput from "$component/dashboard/FileInput/FileInput";
+import ImageInput from "$component/dashboard/ImageInput/ImageInput";
 
 export default function ChangePage() {
   const [title, setTitle] = useState("");
   const [title_en, setTitleEn] = useState("");
   const [url, setUrl] = useState("");
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!file) {
-      alert("Пожалуйста, выберите файл");
+      alert("Будь ласка, оберіть файл");
       return;
     }
 
@@ -45,7 +46,7 @@ export default function ChangePage() {
       <div className="main__form container-lg mt-5">
         <h1 className="form-title admin-title mb-4">Додати посилання</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
-          <FileInput isRequired={true} setFile={setFile} />
+          <ImageInput image={file} setImage={setFile} />
           <div className="input-group mb-3">
             <span className="input-group-text" id="inputGroup-sizing-default">Заголовок:</span>
             <input

@@ -58,7 +58,7 @@ const InfoBlock = () => {
 									<div className="left">
 										<div className="icon_shveya">
 											<Image
-												src={process.env.BACK_URL_IMG + slide.path}
+												src={'http://drive.google.com/uc?export=view&id=' + slide.path}
 												alt="logo"
 												width={356}
 												height={61}
