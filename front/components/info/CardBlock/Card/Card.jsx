@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { forwardRef } from "react";
 
-
-
 const Card = forwardRef(({ title, number, img }, ref) => {
 
 	const blockAnitmation = {

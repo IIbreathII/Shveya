@@ -6,6 +6,7 @@ import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
 import dynamic from 'next/dynamic';
 const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
+const MapPicker = dynamic(() => import("$component/dashboard/MapPicker/MapPicker"), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
 import { postData } from "api";
 
@@ -44,6 +45,9 @@ export default function ChangePage() {
       )}
       <div className="main__form container-lg mt-5">
         <h1 className="form-title admin-title mb-4">Додати маркер на карті</h1>
+
+        <MapPicker lat={lat} lng={lng} setLat={setLat} setLng={setLng} />
+
         <form className="form needs-validation" onSubmit={handleSubmit}>
           <div className="input-group mb-3">
             <span className="input-group-text" id="inputGroup-sizing-default">Широта:</span>
@@ -108,7 +112,7 @@ export default function ChangePage() {
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>
-      <Bootstrap/>
+      <Bootstrap />
     </main>
   );
 }

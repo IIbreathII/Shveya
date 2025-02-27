@@ -244,6 +244,11 @@ body {
   }
 }
 
+.img-modal .spinner-border {
+  border: 0.25em solid #fff;
+  border-right-color: transparent;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

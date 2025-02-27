@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
 import { postData } from "api";
+import FileInput from "$component/dashboard/FileInput/FileInput";
 
 export default function ChangePage() {
   const [title, setTitle] = useState("");
@@ -52,17 +53,7 @@ export default function ChangePage() {
         <h1 className="form-title admin-title mb-4">Додати слайд</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
           <div className="ua">
-            <div className="input-group mb-3">
-              <input
-                required
-                type="file"
-                className="form-control"
-                id="inputGroupFile02"
-                onChange={(e) => setFile(e.target.files[0])}
-                accept="image/*"
-              />
-              <label className="input-group-text" htmlFor="inputGroupFile02">Зображення</label>
-            </div>
+            <FileInput isRequired={true} setFile={setFile} />
             <div className="input-group mb-3">
               <span className="input-group-text" id="inputGroup-sizing-default">Заголовок:</span>
               <input

@@ -40,13 +40,13 @@
 @media (hover: hover) {
     .conbox .left:hover {
         background: url('/images/conblock/bg2.jpg') center center no-repeat;
-        background-size: 110% 110%;
+        background-size: cover;
         opacity: 2;
     }
 
     .conbox .right1:hover {
-        background: url('/images/conblock/bg1.jpg') center center no-repeat;
-        background-size: 110% 110%;
+        background: url('/images/conblock/bg1.jpg') center 40% no-repeat;
+        background-size: cover;
         opacity: 2;
     }
 }

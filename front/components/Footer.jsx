@@ -109,6 +109,11 @@ const Footer = () => {
 										{lang == "ua" ? "Підтримати донатом" : "Support with a donation"}
 									</Link>
 								</div>
+								<div className="column-footer__row">
+									<Link className="column-footer__link" href="/dashboard">
+										{lang == "ua" ? "Адмін панель" : "Admin panel"}
+									</Link>
+								</div>
 							</div>
 						</div>
 					</div>

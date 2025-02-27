@@ -4,7 +4,7 @@ const AuthorSectEn = ({ masterClassData }) => {
   return (
     <section className="author">
       <div className="author__container">
-        <h2>Authors of templates:</h2>
+        <h2>Product developers</h2>
         <div className="author__list">
           {masterClassData.authors_en.map((e, index) => (
             <div key={index}>{e}</div>

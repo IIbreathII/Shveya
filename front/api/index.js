@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 // функція отримання карток
 export async function getData(type, setData) {
@@ -25,17 +26,24 @@ export async function getEnData(type, setData) {
 // функція видалення карток
 export async function deleteDataById(type, id, setData) {
 	try {
-		await axios.delete(`${process.env.BACK_URL}${type}/${id}`);
+		await axios.delete(`${process.env.BACK_URL}${type}/${id}`, {
+			headers: {
+				
+			},
+			withCredentials: true
+		});
+
 		setData((prevData) => prevData.filter((data) => data.id !== id));
 	} catch (error) {
-		console.error(`Помилка при видаленні елемнта з id ${id}:`, error);
+		console.error(`Помилка при видаленні елемента з id ${id}:`, error);
+		alert("Помилка при видаленні.");
 	}
 }
-
 export async function postData(type, formData, setShowAlert) {
 	try {
 		await axios.post(process.env.BACK_URL + type, formData, {
 			headers: { "Content-Type": "multipart/form-data" },
+			withCredentials: true
 		});
 		setShowAlert(true);
 		setTimeout(() => setShowAlert(false), 3000);
@@ -49,6 +57,7 @@ export async function postDataJson(type, data, setShowAlert) {
 	try {
 		await axios.post(process.env.BACK_URL + type, data, {
 			headers: { "Content-Type": "application/json" },
+			withCredentials: true
 		});
 		setShowAlert(true);
 		setTimeout(() => setShowAlert(false), 3000);
@@ -62,6 +71,7 @@ export async function changeData(type, id, data, setShowAlert) {
 	try {
 		await axios.put(process.env.BACK_URL + type + "/" + id, data, {
 			headers: { "Content-Type": "multipart/form-data" },
+			withCredentials: true
 		});
 		setShowAlert(true);
 		setTimeout(() => setShowAlert(false), 3000);
@@ -72,14 +82,15 @@ export async function changeData(type, id, data, setShowAlert) {
 }
 
 export async function changeJsonData(type, id, data, setShowAlert) {
-    try {
-        await axios.put(`${process.env.BACK_URL}${type}/${id}`, data, {
-            headers: { "Content-Type": "application/json" },
-        });
-        setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 3000);
-    } catch (error) {
-        console.error("Помилка при відправці даних:", error);
-        alert("Помилка при відправці даних.");
-    }
+	try {
+		await axios.put(`${process.env.BACK_URL}${type}/${id}`, data, {
+			headers: { "Content-Type": "application/json" },
+			withCredentials: true
+		});
+		setShowAlert(true);
+		setTimeout(() => setShowAlert(false), 3000);
+	} catch (error) {
+		console.error("Помилка при відправці даних:", error);
+		alert("Помилка при відправці даних.");
+	}
 }

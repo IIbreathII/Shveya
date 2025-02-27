@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Eye, EyeOff } from 'lucide-react';
+import Image from "next/image";
 
 const AuthForm = () => {
     const [username, setUsername] = useState("");
@@ -10,12 +12,11 @@ const AuthForm = () => {
     const [error, setError] = useState("");
     const router = useRouter();
 
-    // Явно указываем ссылку на бэкенд (NestJS)
-    const BACKEND_URL = "http://localhost:3007"; // Измени на свой адрес
+    const [showPassword, setShowPassword] = useState(false);
 
     // Авторизация через Google
     const Google = () => {
-        router.push(`${BACKEND_URL}/auth/google`);
+        router.push(`${process.env.BACK_URL_IMG}auth/google`);
     };
 
     // Авторизация через базу данных
@@ -27,8 +28,8 @@ const AuthForm = () => {
 
         try {
             await axios.post(
-                `${BACKEND_URL}/auth/login`,
-                { username, password }, 
+                `${process.env.BACK_URL_IMG}auth/login`,
+                { username, password },
                 {
                     headers: { "Content-Type": "application/json" },
                     withCredentials: true, // Включаем поддержку cookies
@@ -60,24 +61,39 @@ const AuthForm = () => {
                         placeholder="Введіть ім'я користувача"
                     />
                 </div>
-                <div className="input-group">
-                    <label className="login-form__label" htmlFor="password">
-                        Пароль
-                    </label>
-                    <input
-                        className="login-form__input"
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Введіть пароль"
-                    />
+                <div className="input-group _last">
+                    <label className="login-form__label" htmlFor="password">Пароль</label>
+                    <div className="password-wrapper">
+                        <input
+                            className="login-form__input"
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Введіть пароль"
+                        />
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        </button>
+                    </div>
                 </div>
                 <div className="button-group">
                     <button className="login-form__submit" type="button" onClick={DataBase}>
                         Увійти
                     </button>
-                    <button className="google-button" type="button" onClick={Google}></button>
+                    <button className="google-button" type="button" onClick={Google}>
+                        <Image
+                            src={"/images/google.png"}
+                            width={25}
+                            height={25}
+                            alt="google auth"
+                        />
+                        Continue with Google
+                    </button>
                 </div>
             </form>
         </div>

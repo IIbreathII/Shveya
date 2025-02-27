@@ -8,9 +8,11 @@ import dynamic from 'next/dynamic';
 const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'), { ssr: false });
 import Alert from "$component/dashboard/Alert/Alert";
 import { postData } from "api";
+import FileInput from "$component/dashboard/FileInput/FileInput";
+import PhotoInput from "$component/dashboard/ImageInput/ImageInput";
 
 export default function ChangePage() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState("");
   const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -38,17 +40,7 @@ export default function ChangePage() {
       <div className="main__form container-lg mt-5">
         <h1 className="form-title admin-title mb-4">Додати партнера</h1>
         <form className="form needs-validation" onSubmit={handleSubmit}>
-          <div className="input-group mb-3">
-            <input
-              required
-              type="file"
-              className="form-control"
-              id="inputGroupFile02"
-              onChange={(e) => setFile(e.target.files[0])}
-              accept="image/*"
-            />
-            <label className="input-group-text" htmlFor="inputGroupFile02">Зображення</label>
-          </div>
+          <PhotoInput photos={file} setPhotos={setFile}/>
           <button type="submit" className="btn btn-primary">Save</button>
         </form>
       </div>

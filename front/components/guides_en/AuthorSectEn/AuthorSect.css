@@ -19,12 +19,12 @@
 	font-size: 20px;
 	background-color: #2e2e35;
 	color: #E8DCD0;
-	display: flex;
+	display: inline-block;
 	align-items: center;
 	justify-content: center;
-	padding: 8px;
+	padding: 8px 20px;
 	border-radius: 5px;
-	width: 350px;
+	width: auto;
 	margin: 0px 0px 15px 0px;
   }
   
@@ -38,6 +38,5 @@
   
   .author__list div {
 	padding: 10px 15px;
-	white-space: nowrap;
 	display: inline-block;
   }

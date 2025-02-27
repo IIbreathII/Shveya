@@ -50,7 +50,7 @@ const SearchMarkers = ({ markers, handleZoom }) => {
 				type="text"
 				value={query}
 				onChange={handleInputChange}
-				placeholder={lang == "ua" ? "Знайти відділення..." : "Find a branch..."}
+				placeholder={lang == "ua" ? "Знайти підрозділ..." : "Find a subdivision..."}
 				className="search__input"
 			/>
 			{filteredMarkers.length > 0 && isFocused && (

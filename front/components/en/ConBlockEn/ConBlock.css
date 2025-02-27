@@ -19,7 +19,8 @@
     gap: 20px;
 }
 
-.conbox .left, .conbox .right1 {
+.conbox .left,
+.conbox .right1 {
     height: 100%;
     width: 49.8%;
     display: flex;
@@ -40,18 +41,19 @@
 @media (hover: hover) {
     .conbox .left:hover {
         background: url('/images/conblock/bg2.jpg') center center no-repeat;
-        background-size: 110% 110%;
+        background-size: cover;
         opacity: 2;
     }
 
     .conbox .right1:hover {
-        background: url('/images/conblock/bg1.jpg') center center no-repeat;
-        background-size: 110% 110%;
+        background: url('/images/conblock/bg1.jpg') center 40% no-repeat;
+        background-size: cover;
         opacity: 2;
     }
 }
 
-.conbox .left::before, .conbox .right1::before {
+.conbox .left::before,
+.conbox .right1::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -64,18 +66,20 @@
     transition: opacity 0.8s ease;
 }
 
-.conbox .left:hover::before, .conbox .right1:hover::before {
+.conbox .left:hover::before,
+.conbox .right1:hover::before {
     opacity: 0.6;
 }
 
-.conbox .right1 span, .conbox .left h1 {
+.conbox .right1 span,
+.conbox .left h1 {
     position: relative;
-    max-width: 394px !important;
+    max-width: 390px;
     z-index: 1;
 }
 
 .conbox .left h1 {
-    max-width: 394px !important;
+    max-width: 454px;
     font-size: 32px;
     color: #2e2e35;
     font-family: 'intro', sans-serif;
@@ -94,16 +98,21 @@
         flex-direction: column;
         gap: 60px;
     }
-    .conbox .right1, .conbox .left {
+
+    .conbox .right1,
+    .conbox .left {
         width: 100%;
         height: auto;
     }
-    .conbox .right1 span, .conbox .left h1 {
+
+    .conbox .right1 span,
+    .conbox .left h1 {
         font-size: 24px;
         max-width: none;
         width: 100%;
         padding: 40px 20px;
     }
+
     .conboxcontainer {
         height: auto;
         padding: 0 10px;

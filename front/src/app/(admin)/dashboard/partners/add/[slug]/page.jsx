@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import "$style/bootstrap.min.css";
 import "$style/admin/Admin.css";
 import dynamic from 'next/dynamic';
@@ -9,6 +8,7 @@ const Bootstrap = dynamic(() => import('$component/guides/Bootstrap/Bootstrap'),
 import Alert from "$component/dashboard/Alert/Alert";
 import { changeData, getData, postData } from "api";
 import { useParams } from "next/navigation";
+import FileInput from "$component/dashboard/FileInput/FileInput";
 
 export default function ChangePage() {
 	const [file, setFile] = useState(null);
@@ -42,16 +42,7 @@ export default function ChangePage() {
 			<div className="main__form container-lg mt-5">
 				<h1 className="form-title admin-title mb-4">Змінити партнера</h1>
 				<form className="form needs-validation" onSubmit={handleSubmit}>
-					<div className="input-group mb-3">
-						<input
-							type="file"
-							className="form-control"
-							id="inputGroupFile02"
-							onChange={(e) => setFile(e.target.files[0])}
-							accept="image/*"
-						/>
-						<label className="input-group-text" htmlFor="inputGroupFile02">Зображення</label>
-					</div>
+					<FileInput isRequired={true} setFile={setFile} />
 					<button type="submit" className="btn btn-primary">Save</button>
 				</form>
 			</div>

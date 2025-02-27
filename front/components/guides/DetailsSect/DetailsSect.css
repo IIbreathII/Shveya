@@ -33,8 +33,8 @@
     font-size: 18px;
     color: #333;
     line-height: 1.5;
-    text-align: justify;
-    margin-bottom: 15px;
+    text-align: left;
+    margin-bottom: 25px;
   }
   
   @media (max-width: 900px) {
@@ -42,7 +42,7 @@
       padding: 15px;
     }
     .details h2 {
-      width: 100%; /* Заголовок занимает всю ширину контейнера */
+      width: 100%;
     }
   }
   
