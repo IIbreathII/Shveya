@@ -1,13 +1,13 @@
 .About-section {
   width: 100%; 
-  height: 700px;
+  height: 900px;
   background-color: rgb(42, 42, 50);
   display: flex;
   justify-content: center; 
 }
 
 .About-box {
-  height: 700px;
+  height: 900px;
   width: 1700px;
   background-image: url("/images/about/Background.png"); 
   background-size: cover;  
@@ -61,7 +61,7 @@
   width: 600px;
   max-width: 600px;
   color: #e8dcd0;
-  font-size: 16px;
+  font-size:18px;
   font-family: "Caviar Dreams Bold";
   line-height: 1.6;
   margin-top: 2%;
@@ -88,10 +88,12 @@
   .About-section {
     width: 100vw; 
     height: 700px;
-    background-color: rgb(42, 42, 50);
-    display: flex;
-    justify-content: center; 
+
   }
+  .About-box {
+    height: 700px;
+  }
+  
   .Left-side-About {
     width: 570px;
   }
@@ -137,7 +139,7 @@
 
   .about-text {
     width: 400px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
 }
@@ -151,7 +153,7 @@
 
   .about-text {
     width: 300px;
-    font-size: 16px;
+    font-size: 12px;
   }
   
 }
