@@ -1,0 +1,115 @@
+.Team-section {
+  width: 100vw; 
+  height: auto;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  background-color: #222229;
+}
+
+.Team-box {
+  width: 1700px;
+  height: auto;
+  background-color: #222229;
+  display: flex;
+  justify-content: space-evenly; 
+  flex-wrap: wrap; 
+  gap: 30px; 
+  padding: 10px; 
+}
+
+.Team-member {
+  width: auto; 
+  height: auto;
+  background-color: #222229;
+  display: flex;
+  margin-top: 28px;
+  flex-direction: column; /* Робимо вертикальний розподіл */
+  margin-bottom: 20px;
+}
+
+.Team-member .top {
+  width: auto; /* Робимо ширину 100% від батьківського контейнера */
+  height: auto; /* Половина висоти Team-member */
+  display: flex;
+  justify-content: center; 
+  background-color: #222229;
+}
+
+.Team-member .bot {
+  width: auto;
+  height: auto;
+  background-color: #222229;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Member-Icon {
+  width: 200px; 
+  height: 200px; 
+  border-radius: 50%; /* Делает изображение круглым */
+  object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+}
+
+.member-title {
+  font-size: 20px;
+  color: #e8dcd0;
+  font-family: "intro";
+  width: 100%;
+  text-align: center;
+
+}
+
+.member-text {
+  color: #e8dcd0;
+  font-size: 30px;
+  font-family: "Caviar";
+  line-height: 1.6;
+
+}
+
+@media (max-width: 1450px) {
+  .Member-Icon {
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; /* Делает изображение круглым */
+    object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+  }
+ 
+  .member-title {
+    font-size: 15px;
+   
+  
+  }
+  
+  .member-text {
+    
+    font-size: 25px;
+    
+  
+  }
+}
+
+
+@media (max-width: 950px) {
+  .Member-Icon {
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; /* Делает изображение круглым */
+    object-fit: cover; /* Обрезает изображение, сохраняя пропорции */
+  }
+ 
+  .member-title {
+    font-size: 10px;
+   
+  
+  }
+  
+  .member-text {
+    
+    font-size: 20px;
+    
+  
+  }
+}

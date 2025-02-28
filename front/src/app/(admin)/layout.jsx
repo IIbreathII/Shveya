@@ -21,6 +21,7 @@ export default function AdminLayout({ children }) {
 									</Link>
 									<ul className="dropdown-menu">
 										<li><Link className="dropdown-item" href="/dashboard/slides">Слайди</Link></li>
+										<li><Link className="dropdown-item" href="/dashboard/masterclass">Слайди-сюжети</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/cards">Статистичні картки</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/media">Медіа посилання</Link></li>
 										<li><Link className="dropdown-item" href="/dashboard/partners">Партнери</Link></li>
