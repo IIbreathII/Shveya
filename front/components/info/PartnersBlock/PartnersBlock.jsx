@@ -41,7 +41,7 @@ const PartnersBlock = () => {
     swipe: true,
     arrows: false,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 3000,
     cssEase: "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
     customPaging: () => <div className="custom-dot"></div>,
   };
