@@ -1,42 +1,121 @@
 .partners {
-	background: #ebddd0;
+	background: #2e2e35;
 	position: relative;
 	z-index: 2;
-	border-bottom: 12px solid #2e2e35;
-	box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.562);
-}
-
-.partners__wrapper {
+	border-bottom: clamp(6px, 1vw, 12px) solid #2e2e35;
+	box-shadow: 0px 0px clamp(10px, 2vw, 20px) clamp(4px, 1vw, 8px) rgba(0, 0, 0, 0.562);
+	padding-bottom: clamp(10px, 5vw, 20px);
+	text-align: center;
+  }
+  
+  .partners__wrapper {
 	background-color: #2e2e35;
-}
-
-.partners__container {
+  }
+  
+  .partners__container {
 	max-width: 1200px;
-	padding: 55px 15px;
+	padding: clamp(10px, 3vw, 15px);
 	margin: 0 auto;
 	cursor: pointer;
-}
-
-.partners__partner img {
-	max-height: 130px;
-	max-width: 200px;
-}
-
-.partners__title {
+  }
+  
+  .partners__title {
 	color: #ebddd0;
-	padding: 20px 0px 0px 0px;
+	padding: clamp(10px, 2vw, 20px) 0 0 0;
 	background-color: #2e2e35;
-	border-top: 12px solid #2e2e35;
-}
-
-.partners__slide {
-	width: auto;
+	border-top: clamp(6px, 1vw, 12px) solid #2e2e35;
+	font-size: clamp(18px, 4vw, 32px);
+	display: inline-block;
+	position: relative;
+  }
+  
+  .partners__line {
+	width: calc(100% + clamp(10px, 2vw, 30px));
+	max-width: 300px;
+	height: clamp(2px, 0.5vw, 4px);
+	background-color: #50d37c;
+	margin: clamp(2px, 1vw, 5px) auto clamp(5px, 2vw, 15px);
+	border-radius: 2px;
+	position: relative;
+  }
+  
+  /* Контейнер каждого ряда */
+  .partners__row {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: clamp(5px, 1vw, 10px);
+	justify-items: center;
+	align-items: center;
+	height: clamp(100px, 10vw, 150px);
+  }
+  
+  /* Каждый партнер */
+  .partners__partner {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	user-select: none;
-}
-
-.partners .swiper-slide {
-	width: auto !important;
-}
+	width: 100%;
+  }
+  
+  /* Изображение */
+  .partners__partner img {
+	max-width: clamp(65px, 10vw, 130px);
+	max-height: clamp(65px, 10vw, 130px);
+  }
+  
+  .partners__slider .slick-list {
+	height: clamp(100px, 10vw, 150px);
+  }
+  
+  /* Контейнер для точек */
+  .slick-dots {
+	position: absolute;
+	bottom: clamp(-25px, -5vw, -30px);
+	
+	transform: translateX(-50%) scale(clamp(0.5, 0.7vw, 0.7));
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	gap: clamp(3px, 0.8vw, 5px);
+	width: auto;
+  }
+  
+  /* Одиночная точка */
+  .slick-dots li {
+	width: clamp(4px, 0.8vw, 8px);
+	height: clamp(4px, 0.8vw, 8px);
+	border: clamp(1px, 0.6vw, 2.5px) solid rgb(52, 52, 59);
+	background-color: rgb(232, 220, 208);
+	border-radius: 50%;
+	box-shadow: 0px 0px clamp(8px, 2vw, 16px) clamp(0.7px, 0.5vw, 1.4px) rgba(0, 0, 0, 0.42);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  /* Активная точка */
+  .slick-dots li.slick-active {
+	background-color: rgb(52, 52, 59);
+	border-color: rgb(232, 220, 208);
+	transform: scale(0.9);
+  }
+  
+  /* Убираем кнопку внутри точки */
+  .slick-dots li button {
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+	border: none;
+	background: transparent;
+  }
+  
+  .partners__slider-wrapper {
+	position: relative;
+	text-align: center;
+	width: 100%;
+  }
+  
