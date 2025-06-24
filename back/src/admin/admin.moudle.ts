@@ -12,6 +12,8 @@ import { PlotsModule } from './plot_slides/plots.module';
 import { TeamModule } from './team_members/team.module';
 import { PaymentsModule } from './payment/payment.module';
 import { QuestionModule } from './questions/questions.module';
+import { WorkShopCardsModule } from './workShopCards/workShopCards.module';
+import { NewsModule } from './data_news/news.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { QuestionModule } from './questions/questions.module';
     TeamModule,
     PaymentsModule,
     QuestionModule,
+    WorkShopCardsModule,
+    NewsModule,
   ],
 })
 export class AdminModule {}
