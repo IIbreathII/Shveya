@@ -57,6 +57,12 @@ export class NewsController {
     return this.newsService.findAllPaginated(page, limit, lang);
   }
 
+
+  @Get('all')
+  async getAllNews(): Promise<News[]> {
+    return this.newsService.getAllNews();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Отримати новину за ID' })
   @ApiParam({ name: 'lang', description: 'Мова (uk|en)', example: 'uk' })

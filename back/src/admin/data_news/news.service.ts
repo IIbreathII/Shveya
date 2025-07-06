@@ -93,4 +93,10 @@ export class NewsService {
     const result = await this.newsRepository.delete(id);
     if (result.affected === 0) throw new NotFoundException(`Новину з id ${id} не знайдено`);
   }
+
+  async getAllNews(): Promise<News[]> {
+    return this.newsRepository.find({
+      order: { createdAt: 'DESC' },
+    });
+  }
 }
