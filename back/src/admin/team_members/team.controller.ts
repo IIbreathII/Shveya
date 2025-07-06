@@ -103,7 +103,6 @@ export class TeamsController {
 
 
   @Patch('reorder')
-  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: 'Пріоритет членів команди — пересортування' })
   @ApiBody({
     description: 'Новий порядок команд за масивом їхніх ID',
