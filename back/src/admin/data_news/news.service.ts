@@ -94,9 +94,9 @@ export class NewsService {
     if (result.affected === 0) throw new NotFoundException(`Новину з id ${id} не знайдено`);
   }
 
-  async getAllNews(): Promise<News[]> {
-    return this.newsRepository.find({
-      order: { createdAt: 'DESC' },
-    });
-  }
+  async getAllNewsById(id: number): Promise<News | null> {
+  return this.newsRepository.findOne({
+    where: { id },
+  });
+}
 }

@@ -10,6 +10,7 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   UseGuards,
+  NotFoundException
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -58,9 +59,13 @@ export class NewsController {
   }
 
 
-  @Get('all')
-  async getAllNews(): Promise<News[]> {
-    return this.newsService.getAllNews();
+  @Get('/all/:id')
+  async getAllNewsById(@Param('id') id: string): Promise<News> {
+    const news = await this.newsService.getAllNewsById(Number(id));
+    if (!news) {
+      throw new NotFoundException(`News with id ${id} not found`);
+    }
+    return news;
   }
 
   @Get(':id')
