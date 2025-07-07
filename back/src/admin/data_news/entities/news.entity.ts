@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
+import { Tag } from './tags.entity';
 
 export type ParagraphText = {
   text: string;
@@ -16,29 +23,27 @@ export class News {
   id: number;
 
   // Ukrainian tags
-  @Column('simple-array')
-  tagsUk: string[];
+  @ManyToMany(() => Tag, (tag) => tag.newsUk, { cascade: true })
+  @JoinTable({ name: 'news_tags_uk' })
+  tagsUk: Tag[];
 
   // English tags
-  @Column('simple-array', { nullable: true })
-  tagsEn?: string[];
+  @ManyToMany(() => Tag, (tag) => tag.newsEn, { cascade: true, nullable: true })
+  @JoinTable({ name: 'news_tags_en' })
+  tagsEn?: Tag[];
 
-  // Ukrainian title
   @Column()
   titleUk: string;
 
-  // English title
   @Column({ nullable: true })
   titleEn?: string;
 
   @Column({ type: 'timestamp' })
   createdAt: Date;
 
-  // Ukrainian content blocks
   @Column('json')
   contentUk: ContentBlock[];
 
-  // English content blocks
   @Column('json', { nullable: true })
   contentEn?: ContentBlock[];
 }

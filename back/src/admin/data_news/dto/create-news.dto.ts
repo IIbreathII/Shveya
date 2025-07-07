@@ -13,35 +13,76 @@ import { ImageBlockDto, ParagraphBlockDto } from './content-block.dto';
 export type ContentBlockDto = ImageBlockDto | ParagraphBlockDto;
 
 @ApiExtraModels(ImageBlockDto, ParagraphBlockDto)
-export class CreateNewsDto {
-  @ApiProperty({
-    type: [String],
-    example: ['Допомога армії', 'Волонтерство'],
-    description: 'Теги українською',
-  })
-  @IsArray()
-  @IsString({ each: true })
-  tagsUk: string[];
+export class TagUkDto {
+  @ApiProperty({ example: 'Політика', description: 'Тег українською' })
+  @IsString()
+  @IsNotEmpty()
+  nameUk: string;
 
   @ApiProperty({
-    type: [String],
-    example: ['ArmySupport', 'Volunteering'],
-    description: 'Теги англійською',
+    example: 'Politics',
+    description: 'Переклад англійською',
     required: false,
   })
-  @IsArray()
-  @IsString({ each: true })
   @IsOptional()
-  tagsEn?: string[];
+  @IsString()
+  nameEn?: string;
+}
 
-  @ApiProperty({ example: 'Передано бронежилети до зони бойових дій', description: 'Заголовок українською' })
+@ApiExtraModels(ImageBlockDto, ParagraphBlockDto)
+export class TagEnDto {
+  @ApiProperty({ example: 'Volunteering', description: 'Tag in English' })
+  @IsString()
+  @IsNotEmpty()
+  nameEn: string;
+
+  @ApiProperty({
+    example: 'Волонтерство',
+    description: 'Переклад українською',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  nameUk?: string;
+}
+
+@ApiExtraModels(ImageBlockDto, ParagraphBlockDto, TagUkDto, TagEnDto)
+export class CreateNewsDto {
+  @ApiProperty({
+    type: [TagUkDto],
+    description: 'Список тегів українською (обов’язково nameUk)',
+  })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => TagUkDto)
+  tagsUk: TagUkDto[];
+
+  @ApiProperty({
+    type: [TagEnDto],
+    description: 'Список тегів англійською (обов’язково nameEn)',
+    required: false,
+  })
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => TagEnDto)
+  tagsEn?: TagEnDto[];
+
+  @ApiProperty({
+    example: 'Передано бронежилети до зони бойових дій',
+    description: 'Заголовок українською',
+  })
   @IsString()
   @IsNotEmpty()
   titleUk: string;
 
-  @ApiProperty({ example: 'Body armor delivered to combat zone', description: 'Заголовок англійською', required: false })
-  @IsString()
+  @ApiProperty({
+    example: 'Body armor delivered to combat zone',
+    description: 'Заголовок англійською',
+    required: false,
+  })
   @IsOptional()
+  @IsString()
   titleEn?: string;
 
   @ApiProperty({
@@ -65,19 +106,16 @@ export class CreateNewsDto {
   })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(
-    () => Object,
-    {
-      discriminator: {
-        property: 'type',
-        subTypes: [
-          { name: 'image', value: ImageBlockDto },
-          { name: 'paragraph', value: ParagraphBlockDto },
-        ],
-      },
-      keepDiscriminatorProperty: true,
+  @Type(() => Object, {
+    discriminator: {
+      property: 'type',
+      subTypes: [
+        { name: 'image', value: ImageBlockDto },
+        { name: 'paragraph', value: ParagraphBlockDto },
+      ],
     },
-  )
+    keepDiscriminatorProperty: true,
+  })
   contentUk: ContentBlockDto[];
 
   @ApiProperty({
@@ -91,21 +129,18 @@ export class CreateNewsDto {
     },
     required: false,
   })
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(
-    () => Object,
-    {
-      discriminator: {
-        property: 'type',
-        subTypes: [
-          { name: 'image', value: ImageBlockDto },
-          { name: 'paragraph', value: ParagraphBlockDto },
-        ],
-      },
-      keepDiscriminatorProperty: true,
+  @Type(() => Object, {
+    discriminator: {
+      property: 'type',
+      subTypes: [
+        { name: 'image', value: ImageBlockDto },
+        { name: 'paragraph', value: ParagraphBlockDto },
+      ],
     },
-  )
-  @IsOptional()
+    keepDiscriminatorProperty: true,
+  })
   contentEn?: ContentBlockDto[];
 }
