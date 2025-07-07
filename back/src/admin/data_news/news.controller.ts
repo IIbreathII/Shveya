@@ -11,6 +11,8 @@ import {
   ParseIntPipe,
   ParseEnumPipe,
   NotFoundException,
+  HttpStatus,
+  HttpCode,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -23,7 +25,9 @@ import {
 import { NewsService } from './news.service';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
+import { UpdateTagDto } from './dto/update-tag.dto'
 import { News } from './entities/news.entity';
+import { Tag } from './entities/tags.entity'
 
 export enum Lang {
   uk = 'uk',
@@ -45,6 +49,13 @@ export class NewsController {
     return this.newsService.create(createNewsDto);
   }
 
+  @Get("tags")
+  @ApiOperation({ summary: 'Отримати всі теги (незалежно від мови)' })
+  @ApiResponse({ status: 200, description: 'Список тегів', type: [Tag] })
+  getAll(): Promise<Tag[]> {
+    return this.newsService.getAllTags();
+  }
+  
   @Get()
   @ApiOperation({ summary: 'Отримати список новин з пагінацією' })
   @ApiParam({ name: 'lang', description: 'Мова (uk|en)', example: 'uk' })
@@ -95,6 +106,34 @@ export class NewsController {
   ) {
     return this.newsService.update(id, updateNewsDto);
   }
+
+  @Patch('tag/:id')
+  @ApiOperation({ summary: 'Оновити тег за ID' })
+  @ApiParam({ name: 'lang', description: 'Мова (uk|en)', example: 'uk' })
+  @ApiParam({ name: 'id', description: 'ID тега', example: 1 })
+  @ApiBody({ type: UpdateTagDto })
+  @ApiResponse({ status: 200, description: 'Тег оновлено', type: Tag })
+  updateTag(
+    @Param('lang', new ParseEnumPipe(Lang)) lang: Lang,    // <-- додали lang
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateTagDto,
+  ): Promise<Tag> {
+    return this.newsService.updateTag(id, dto);
+  }
+
+  @Delete('tag/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: 'Видалити тег за ID' })
+  @ApiParam({ name: 'lang', description: 'Мова (uk|en)', example: 'uk' })
+  @ApiParam({ name: 'id', description: 'ID тега', example: 1 })
+  @ApiResponse({ status: 204, description: 'Тег видалено' })
+  removeTag(
+    @Param('lang', new ParseEnumPipe(Lang)) lang: Lang,    // <-- додали lang
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<void> {
+    return this.newsService.removeTag(id);
+  }
+
 
   @Delete(':id')
   @ApiOperation({ summary: 'Видалити новину за ID' })

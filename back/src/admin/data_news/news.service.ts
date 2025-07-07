@@ -6,6 +6,7 @@ import { News } from './entities/news.entity';
 import { Tag } from './entities/tags.entity';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
+ import { UpdateTagDto } from './dto/update-tag.dto'
 
 export type Lang = 'uk' | 'en';
 
@@ -185,8 +186,26 @@ export class NewsService {
     });
   }
 
+ async updateTag(id: number, dto: UpdateTagDto): Promise<Tag> {
+
+    const tag = await this.tagRepository.preload({ id, ...dto });
+    if (!tag) {
+      throw new NotFoundException(`Тег з id=${id} не знайдено`);
+    }
+    return this.tagRepository.save(tag);
+  }
+
+  async removeTag(id: number): Promise<void> {
+    const result = await this.tagRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException(`Тег з id=${id} не знайдено`);
+    }
+  }
 
 
+  async getAllTags(): Promise<Tag[]> {
+    return this.tagRepository.find();
+  }
 
   async remove(id: number): Promise<void> {
     const result = await this.newsRepository.delete(id);
