@@ -16,9 +16,39 @@ export class PartnersService {
   ) {}
 
   async getAllPartners(): Promise<Partner[]> {
-    return this.PartnerRepository.find({ cache: false });
-  }
+    const partners = await this.PartnerRepository.find({ cache: false });
 
+    const positionSet = new Set<number>();
+    const duplicates = new Set<number>();
+    for (const partner of partners) {
+      if (positionSet.has(partner.position)) {
+        duplicates.add(partner.position);
+      } else {
+        positionSet.add(partner.position);
+      }
+    }
+
+    if (duplicates.size > 0) {
+      throw new Error(
+        `Обнаружены дубликаты позиций: ${Array.from(duplicates).join(', ')}`,
+      );
+    }
+
+    const maxPosition = Math.max(...partners.map((p) => p.position));
+    const expectedPositions = new Set<number>(
+      Array.from({ length: maxPosition }, (_, i) => i + 1),
+    );
+    const actualPositions = new Set(partners.map((p) => p.position));
+    const missingPositions = Array.from(expectedPositions).filter(
+      (p) => !actualPositions.has(p),
+    );
+
+    if (missingPositions.length > 0) {
+      throw new Error(`Пропущены позиции: ${missingPositions.join(', ')}`);
+    }
+
+    return partners.sort((a, b) => a.position - b.position);
+  }
   async createPartner(createPartnerDto: CreatePartnerDto): Promise<Partner> {
     const newPartner = this.PartnerRepository.create(createPartnerDto);
     return this.PartnerRepository.save(newPartner);
@@ -41,7 +71,6 @@ export class PartnersService {
       throw new NotFoundException(`Partner with ID ${id} not found`);
     }
 
-    // Удаляем старый файл изображения, если загружено новое
     if (updatePartnerDto.path && Partner.path !== updatePartnerDto.path) {
       const oldFilePath = path.resolve(Partner.path);
       try {
@@ -53,7 +82,6 @@ export class PartnersService {
       }
     }
 
-    // Обновляем данные карточки
     Object.assign(Partner, updatePartnerDto);
     return this.PartnerRepository.save(Partner);
   }
@@ -64,7 +92,6 @@ export class PartnersService {
       throw new NotFoundException(`Partner with ID ${id} not found`);
     }
 
-    // Удаляем файл изображения с диска
     if (Partner.path) {
       const filePath = path.resolve(Partner.path);
       try {
@@ -76,7 +103,6 @@ export class PartnersService {
       }
     }
 
-    // Удаляем запись о карточке из базы данных
     await this.PartnerRepository.remove(Partner);
   }
 

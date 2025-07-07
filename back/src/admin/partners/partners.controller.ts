@@ -115,6 +115,7 @@ export class PartnersController {
     await this.partnersService.deletePartner(id);
     return { message: 'Партнера успішно видалено' };
   }
+
   @ApiParam({ name: 'id', description: 'Зміна пріоритету', example: 1 })
   @ApiResponse({ status: 200, description: 'Пріоритет змінений!' })
   @Patch('reorder')

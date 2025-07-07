@@ -81,14 +81,14 @@ export class TeamsController {
   async updateTeam(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: any,
-  ) {
-    const parsedBody = typeof body === 'string' ? JSON.parse(body) : body;
-    const updateTeamDto: UpdateTeamDto = {
-      ...parsedBody
-    };
+    ) {
+      const parsedBody = typeof body === 'string' ? JSON.parse(body) : body;
+      const updateTeamDto: UpdateTeamDto = {
+        ...parsedBody
+      };
 
-    return this.TeamsService.updateTeam(id, updateTeamDto);
-  }
+      return this.TeamsService.updateTeam(id, updateTeamDto);
+    }
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard) 
@@ -103,6 +103,7 @@ export class TeamsController {
 
 
   @Patch('reorder')
+  @UseGuards(JwtAuthGuard) 
   @ApiOperation({ summary: 'Пріоритет членів команди — пересортування' })
   @ApiBody({
     description: 'Новий порядок команд за масивом їхніх ID',
