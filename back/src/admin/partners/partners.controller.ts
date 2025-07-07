@@ -121,17 +121,16 @@ export class PartnersController {
   @Patch('reorder')
   @UseGuards(JwtAuthGuard)
   @ApiBody({
-      description: 'Новий порядок партнерів за масивом їхніх ID',
-      type: ReorderPartnersDto,
-      examples: {
-        example1: {
-          summary: 'Поставити партнера з ID 5 на перше місце',
-          value: { ids: [5, 2, 8, 1] },
-        },
+    description: 'Новий порядок партнерів за масивом їхніх ID',
+    type: ReorderPartnersDto,
+    examples: {
+      example1: {
+        summary: 'Поставити партнера з ID 5 на перше місце',
+        value: { ids: [5, 2, 8, 1] },
       },
-    })
+    },
+  })
   async reorder(@Body() dto: ReorderPartnersDto) {
     return this.partnersService.reorder(dto.ids);
   }
-
-} 
+}
