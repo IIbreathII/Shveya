@@ -6,10 +6,10 @@ export class Tag {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ unique: true })
   nameUk: string;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ unique: true })
   nameEn?: string;
 
   @ManyToMany(() => News, (news) => news.tagsUk)

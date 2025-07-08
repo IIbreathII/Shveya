@@ -12,16 +12,15 @@ import { ImageBlockDto, ParagraphBlockDto } from './content-block.dto';
 
 export type ContentBlockDto = ImageBlockDto | ParagraphBlockDto;
 
-@ApiExtraModels(ImageBlockDto, ParagraphBlockDto)
-export class TagUkDto {
-  @ApiProperty({ example: 'Політика', description: 'Тег українською' })
+export class TagDto {
+  @ApiProperty({ example: 'Допомога', description: 'Назва тегу українською' })
   @IsString()
   @IsNotEmpty()
   nameUk: string;
 
   @ApiProperty({
-    example: 'Politics',
-    description: 'Переклад англійською',
+    example: 'Support',
+    description: 'Назва тегу англійською (може бути відсутня)',
     required: false,
   })
   @IsOptional()
@@ -29,44 +28,16 @@ export class TagUkDto {
   nameEn?: string;
 }
 
-@ApiExtraModels(ImageBlockDto, ParagraphBlockDto)
-export class TagEnDto {
-  @ApiProperty({ example: 'Volunteering', description: 'Tag in English' })
-  @IsString()
-  @IsNotEmpty()
-  nameEn: string;
-
-  @ApiProperty({
-    example: 'Волонтерство',
-    description: 'Переклад українською',
-    required: false,
-  })
-  @IsOptional()
-  @IsString()
-  nameUk?: string;
-}
-
-@ApiExtraModels(ImageBlockDto, ParagraphBlockDto, TagUkDto, TagEnDto)
+@ApiExtraModels(ImageBlockDto, ParagraphBlockDto, TagDto)
 export class CreateNewsDto {
   @ApiProperty({
-    type: [TagUkDto],
-    description: 'Список тегів українською (обов’язково nameUk)',
+    type: [TagDto],
+    description: 'Список тегів з перекладами (одночасно nameUk та nameEn)',
   })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => TagUkDto)
-  tagsUk: TagUkDto[];
-
-  @ApiProperty({
-    type: [TagEnDto],
-    description: 'Список тегів англійською (обов’язково nameEn)',
-    required: false,
-  })
-  @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => TagEnDto)
-  tagsEn?: TagEnDto[];
+  @Type(() => TagDto)
+  tags: TagDto[];
 
   @ApiProperty({
     example: 'Передано бронежилети до зони бойових дій',
