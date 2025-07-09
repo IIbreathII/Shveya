@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DataSource, EntityManager } from 'typeorm';
+import { Repository, DataSource, EntityManager, Between } from 'typeorm';
 
 import { News } from './entities/news.entity';
 import { Tag } from './entities/tags.entity';
@@ -198,5 +198,20 @@ export class NewsService {
         { tagId },
       )
       .getMany();
+  }
+
+  async getByData(year: number, month: number, day: number): Promise<News | null> {
+    const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0));
+    const endDate = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999));
+
+    return await this.newsRepository.findOne({
+      where: {
+        createdAt: Between(startDate, endDate),
+      },
+      relations: ['tagsUk', 'tagsEn'],
+      order: {
+        createdAt: 'ASC',
+      },
+    });
   }
 }

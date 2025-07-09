@@ -13,6 +13,7 @@ import {
   NotFoundException,
   HttpStatus,
   HttpCode,
+  BadRequestException,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -89,6 +90,43 @@ export class NewsController {
     if (!news) {
       throw new NotFoundException(`News with id ${id} not found`);
     }
+    return news;
+  }
+
+  @ApiOperation({ summary: 'Отримати новину за датою' })
+  @Get('data/:date')
+  async getByDate(
+    @Param('date') date: string,
+  ): Promise<News> {
+    const parts = date.split('-');
+    if (parts.length !== 3) {
+      throw new BadRequestException(
+        `Не вірний формат дати YYYY-M-D "${date}"`,
+      );
+    }
+
+    const [yearStr, monthStr, dayStr] = parts;
+    const year = parseInt(yearStr, 10);
+    const month = parseInt(monthStr, 10);
+    const day = parseInt(dayStr, 10);
+
+    if (
+      isNaN(year) || isNaN(month) || isNaN(day) ||
+      month < 1 || month > 12 ||
+      day < 1 || day > 31
+    ) {
+      throw new BadRequestException(
+        `Неверные числовые значения даты: "${date}"`,
+      );
+    }
+
+    const news = await this.newsService.getByData(year, month, day);
+    if (!news) {
+      throw new NotFoundException(
+        `Новость за дату ${year}-${month}-${day} не найдена`,
+      );
+    }
+
     return news;
   }
 
