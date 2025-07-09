@@ -49,6 +49,14 @@ export class NewsController {
     return this.newsService.create(createNewsDto);
   }
 
+  @Get('tags/:id')
+  async getNewsByTag(
+    @Param('lang') lang: 'uk' | 'en',
+    @Param('id', ParseIntPipe) tagId: number,
+  ): Promise<News[]> {
+    return this.newsService.getAllNewsByTag(lang, tagId);
+  }
+
   @Get("tags")
   @ApiOperation({ summary: 'Отримати всі теги (незалежно від мови)' })
   @ApiResponse({ status: 200, description: 'Список тегів', type: [Tag] })

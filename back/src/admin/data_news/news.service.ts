@@ -171,4 +171,21 @@ export class NewsService {
       relations: ['tagsUk', 'tagsEn'],
     });
   }
+
+  async getAllNewsByTag(
+    lang: 'uk' | 'en',
+    tagId: number,
+  ): Promise<News[]> {
+    const joinTable = lang === 'uk' ? 'news_tags_uk' : 'news_tags_en';
+
+    return this.newsRepository
+      .createQueryBuilder('n')
+      .innerJoin(
+        joinTable,      
+        'nt',           
+        'nt.newsId = n.id AND nt.tagsId = :tagId',
+        { tagId },
+      )
+      .getMany();
+  }
 }
