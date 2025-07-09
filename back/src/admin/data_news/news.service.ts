@@ -164,12 +164,23 @@ export class NewsService {
     const result = await this.newsRepository.delete(id);
     if (result.affected === 0) throw new NotFoundException(`Новину з id ${id} не знайдено`);
   }
-
-  async getAllNewsById(id: number): Promise<News | null> {
-    return this.newsRepository.findOne({
+    async getAllNewsById(id: number): Promise<News & { tags: Tag[] }> {
+    const news = await this.newsRepository.findOne({
       where: { id },
-      relations: ['tagsUk', 'tagsEn'],
     });
+    if (!news) {
+      throw new NotFoundException(`News with id ${id} not found`);
+    }
+    const tags = await this.tagRepository
+      .createQueryBuilder('tag')
+      .leftJoin('tag.newsUk', 'newsUk')
+      .leftJoin('tag.newsEn', 'newsEn')
+      .where('newsUk.id = :id OR newsEn.id = :id', { id })
+      .getMany();
+    return {
+      ...news,
+      tags,
+    };
   }
 
   async getAllNewsByTag(
