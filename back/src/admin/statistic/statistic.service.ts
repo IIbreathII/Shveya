@@ -11,25 +11,24 @@ import { Subcategory } from '../data_guides/entities/subcategory.entity';
 import { Plot } from '../plot_slides/entities/plot.entity';
 import { Team } from '../team_members/entities/team.entity';
 import { workShopCards } from '../workShopCards/entities/workShopCards.entity';
+import { News } from '../data_news/entities/news.entity';
+import { Payment } from '../payment/entities/payment.entity';
 
 @Injectable()
 export class StatisticsService {
-  [x: string]: any;
   constructor(
-    @InjectRepository(Marker) private MarkerRepository: Repository<Marker>,
-    @InjectRepository(Card) private cardRepository: Repository<Card>,
-    @InjectRepository(MediaLink)
-    private MediaLinkRepository: Repository<MediaLink>,
-    @InjectRepository(Partner) private PartnerRepository: Repository<Partner>,
-    @InjectRepository(Slide) private SlideRepository: Repository<Slide>,
-    @InjectRepository(Category)
-    private CategoryRepository: Repository<Category>,
-    @InjectRepository(Subcategory)
-    private SubcategoryRepository: Repository<Subcategory>,
-    @InjectRepository(Plot) private PlotRepository: Repository<Plot>,
-    @InjectRepository(Team) private TeamRepository: Repository<Team>,
-    @InjectRepository(workShopCards)
-    private workShopCardsRepository: Repository<workShopCards>,
+    @InjectRepository(Marker)      private MarkerRepository: Repository<Marker>,
+    @InjectRepository(Card)        private cardRepository: Repository<Card>,
+    @InjectRepository(MediaLink)   private MediaLinkRepository: Repository<MediaLink>,
+    @InjectRepository(Partner)     private PartnerRepository: Repository<Partner>,
+    @InjectRepository(Slide)       private SlideRepository: Repository<Slide>,
+    @InjectRepository(Category)    private CategoryRepository: Repository<Category>,
+    @InjectRepository(Subcategory) private SubcategoryRepository: Repository<Subcategory>,
+    @InjectRepository(Plot)        private PlotRepository: Repository<Plot>,
+    @InjectRepository(Team)        private TeamRepository: Repository<Team>,
+    @InjectRepository(workShopCards) private workShopCardsRepository: Repository<workShopCards>,
+    @InjectRepository(News)        private NewsRepository: Repository<News>,
+    @InjectRepository(Payment)     private PaymentRepository: Repository<Payment>,
   ) {}
 
   async getCounts(): Promise<{
@@ -43,29 +42,35 @@ export class StatisticsService {
     Plot: number;
     Team: number;
     workShopCards: number;
+    Payment: number;
+    News: number;
   }> {
-    const MarkerCount = await this.MarkerRepository.count();
-    const cardCount = await this.cardRepository.count();
-    const MediaLinkCount = await this.MediaLinkRepository.count();
-    const PartnerCount = await this.PartnerRepository.count();
-    const SlideCount = await this.SlideRepository.count();
-    const CategoryCount = await this.CategoryRepository.count();
-    const SubcategoryCount = await this.SubcategoryRepository.count();
-    const PlotCount = await this.PlotRepository.count();
-    const TeamCount = await this.TeamRepository.count();
-    const workShopCardsCount = await this.workShopCardsRepository.count();
+    const MarkerCount         = await this.MarkerRepository.count();
+    const cardCount           = await this.cardRepository.count();
+    const MediaLinkCount      = await this.MediaLinkRepository.count();
+    const PartnerCount        = await this.PartnerRepository.count();
+    const SlideCount          = await this.SlideRepository.count();
+    const CategoryCount       = await this.CategoryRepository.count();
+    const SubcategoryCount    = await this.SubcategoryRepository.count();
+    const PlotCount           = await this.PlotRepository.count();
+    const TeamCount           = await this.TeamRepository.count();
+    const workShopCardsCount  = await this.workShopCardsRepository.count();
+    const PaymentCount        = await this.PaymentRepository.count();
+    const NewsCount           = await this.NewsRepository.count();
 
     return {
-      Marker: MarkerCount,
-      card: cardCount,
-      MediaLinks: MediaLinkCount,
-      Partners: PartnerCount,
-      Slide: SlideCount,
-      Category: CategoryCount,
-      Subcategory: SubcategoryCount,
-      Plot: PlotCount,
-      Team: TeamCount,
+      Marker:        MarkerCount,
+      card:          cardCount,
+      MediaLinks:    MediaLinkCount,
+      Partners:      PartnerCount,
+      Slide:         SlideCount,
+      Category:      CategoryCount,
+      Subcategory:   SubcategoryCount,
+      Plot:          PlotCount,
+      Team:          TeamCount,
       workShopCards: workShopCardsCount,
+      Payment:       PaymentCount,
+      News:          NewsCount,
     };
   }
 }

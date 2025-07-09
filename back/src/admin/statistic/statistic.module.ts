@@ -12,6 +12,9 @@ import { Subcategory } from '../data_guides/entities/subcategory.entity';
 import { Plot } from '../plot_slides/entities/plot.entity';
 import { Team } from '../team_members/entities/team.entity';
 import { workShopCards } from '../workShopCards/entities/workShopCards.entity';
+import { Payment } from '../payment/entities/payment.entity'
+import { News } from '../data_news/entities/news.entity'
+
 
 @Module({
   imports: [
@@ -26,6 +29,8 @@ import { workShopCards } from '../workShopCards/entities/workShopCards.entity';
       Plot,
       Team,
       workShopCards,
+      News,
+      Payment,
     ]),
   ],
   controllers: [StatisticsController],
