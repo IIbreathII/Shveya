@@ -49,6 +49,9 @@ export class NewsController {
     return this.newsService.create(createNewsDto);
   }
 
+  @ApiOperation({ summary: 'Отримати список новин за id тега' })
+  @ApiBody({ type: CreateNewsDto })
+  @ApiResponse({ status: 201, description: 'список новин за id', type: News })
   @Get('tags/:id')
   async getNewsByTag(
     @Param('lang') lang: 'uk' | 'en',
